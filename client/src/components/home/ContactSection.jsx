@@ -205,7 +205,7 @@ const ContactSection = () => {
           </div>
 
           {/* Right Column: WhatsApp Inquiry Form */}
-          <div className="card" style={{ padding: '2.25rem' }}>
+          <div className="card contact-card-padding">
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
               WhatsApp Project Inquiry Form
             </h3>
@@ -233,7 +233,7 @@ const ContactSection = () => {
             )}
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-2">
                 <div className="form-group">
                   <label className="form-label">Your Name *</label>
                   <input
@@ -261,7 +261,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-2">
                 <div className="form-group">
                   <label className="form-label">Email Address (Optional)</label>
                   <input
@@ -292,7 +292,7 @@ const ContactSection = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-2">
                 <div className="form-group">
                   <label className="form-label">Website Type</label>
                   <select
