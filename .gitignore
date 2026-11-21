@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment Variables (Keep credentials safe!)
+.env
+.env.local
+.env.*.local
+server/.env
+
+# Production Build
+dist/
+build/
+client/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor & System
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

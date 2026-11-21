@@ -1,0 +1,16 @@
+{
+  "name": "satyam-web-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium Freelancer Portfolio & Website Showcase Platform for Satyam Prajapati",
+  "scripts": {
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "seed": "node server/seeds/seed.js",
+    "server": "node server/server.js",
+    "client": "npm run dev --prefix client",
+    "build": "npm run build --prefix client"
+  },
+  "keywords": ["portfolio", "agency", "mern", "web-developer", "satyam-web-studio"],
+  "author": "Satyam Prajapati",
+  "license": "ISC"
+}
