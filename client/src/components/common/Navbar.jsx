@@ -28,11 +28,14 @@ const Navbar = () => {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
     return () => {
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [mobileMenuOpen]);
 
@@ -99,7 +102,7 @@ const Navbar = () => {
               </a>
             </div>
 
-            {/* Mobile Hamburger Toggle Button (Always visible and easily tap-able on mobile) */}
+            {/* Mobile Hamburger Toggle Button */}
             <button
               className="navbar-toggle"
               onClick={() => setMobileMenuOpen(prev => !prev)}
@@ -118,7 +121,7 @@ const Navbar = () => {
           <div className="mobile-drawer" onClick={(e) => e.stopPropagation()}>
             {/* Drawer Header with Logo and Close Button */}
             <div className="mobile-drawer-header">
-              <div className="navbar-logo" style={{ fontSize: '1.15rem' }}>
+              <div className="navbar-logo" style={{ fontSize: '1.1rem' }}>
                 <div className="navbar-logo-icon" style={{ width: '32px', height: '32px' }}>
                   <Code2 size={18} strokeWidth={2.5} />
                 </div>
@@ -133,7 +136,7 @@ const Navbar = () => {
                 aria-label="Close menu"
                 type="button"
               >
-                <X size={22} />
+                <X size={20} />
               </button>
             </div>
 
@@ -148,13 +151,13 @@ const Navbar = () => {
                     onClick={() => setMobileMenuOpen(false)}
                     className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                       <span className="mobile-nav-icon">
-                        <IconComponent size={18} />
+                        <IconComponent size={17} />
                       </span>
                       <span>{item.name}</span>
                     </div>
-                    <ArrowRight size={16} opacity={0.5} />
+                    <ArrowRight size={15} opacity={0.4} />
                   </NavLink>
                 );
               })}
@@ -162,8 +165,8 @@ const Navbar = () => {
 
             {/* Mobile Contact CTAs */}
             <div className="mobile-drawer-actions">
-              <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>
-                Quick Direct Contact
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Direct Contact
               </div>
 
               {/* WhatsApp Button */}
@@ -172,10 +175,19 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp btn-block"
-                style={{ padding: '0.85rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', textDecoration: 'none', fontSize: '0.96rem' }}
+                style={{
+                  padding: '0.75rem 0.85rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  textDecoration: 'none',
+                  fontSize: '0.9rem',
+                  fontWeight: 700
+                }}
               >
-                <MessageSquare size={18} fill="#FFFFFF" color="#25D366" />
-                <span>Chat on WhatsApp (+91 95540 79669)</span>
+                <MessageSquare size={17} fill="#FFFFFF" color="#25D366" />
+                <span>WhatsApp: +91 95540 79669</span>
               </a>
 
               {/* Calling Buttons */}
@@ -183,29 +195,47 @@ const Navbar = () => {
                 <a
                   href="tel:9554079669"
                   className="btn btn-outline"
-                  style={{ padding: '0.75rem 0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', fontSize: '0.86rem', fontWeight: 700 }}
+                  style={{
+                    padding: '0.65rem 0.25rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.35rem',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    whiteSpace: 'nowrap'
+                  }}
                 >
-                  <Phone size={14} color="var(--accent-primary)" />
-                  <span>Call 9554079669</span>
+                  <Phone size={13} color="var(--accent-primary)" />
+                  <span>9554079669</span>
                 </a>
                 <a
                   href="tel:6307164317"
                   className="btn btn-outline"
-                  style={{ padding: '0.75rem 0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', fontSize: '0.86rem', fontWeight: 700 }}
+                  style={{
+                    padding: '0.65rem 0.25rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.35rem',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    whiteSpace: 'nowrap'
+                  }}
                 >
-                  <Phone size={14} color="var(--accent-primary)" />
-                  <span>Call 6307164317</span>
+                  <Phone size={13} color="var(--accent-primary)" />
+                  <span>6307164317</span>
                 </a>
               </div>
 
               {/* Location & Email info */}
-              <div style={{ marginTop: '0.5rem', paddingTop: '0.75rem', borderTop: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.35rem', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                  <Mail size={14} color="var(--accent-primary)" />
+              <div style={{ marginTop: '0.25rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.3rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', wordBreak: 'break-all' }}>
+                  <Mail size={13} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
                   <span>satyamprajapati065@gmail.com</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                  <MapPin size={14} color="var(--accent-primary)" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <MapPin size={13} color="var(--accent-primary)" style={{ flexShrink: 0 }} />
                   <span>Delhi NCR, India (Available Worldwide)</span>
                 </div>
               </div>
