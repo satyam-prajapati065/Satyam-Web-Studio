@@ -6,9 +6,9 @@ import WhatsAppButton from '../components/common/WhatsAppButton';
 
 const MainLayout = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
       <Navbar />
-      <main style={{ flex: 1 }}>
+      <main style={{ flex: 1, paddingTop: 'var(--header-height)', width: '100%', overflowX: 'hidden' }}>
         <Outlet />
       </main>
       <Footer />

@@ -141,21 +141,21 @@ const ContactSection = () => {
                   <span>Chat on WhatsApp (+91 95540 79669)</span>
                 </a>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                <div className="contact-call-actions">
                   <a
                     href="tel:9554079669"
                     className="btn btn-outline"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontWeight: 700 }}
+                    style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem', fontWeight: 700, padding: '0.75rem 0.6rem', fontSize: '0.88rem' }}
                   >
-                    <Phone size={16} color="var(--accent-primary)" />
+                    <Phone size={15} color="var(--accent-primary)" />
                     <span>Call: 9554079669</span>
                   </a>
                   <a
                     href="tel:6307164317"
                     className="btn btn-outline"
-                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontWeight: 700 }}
+                    style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.45rem', fontWeight: 700, padding: '0.75rem 0.6rem', fontSize: '0.88rem' }}
                   >
-                    <Phone size={16} color="var(--accent-primary)" />
+                    <Phone size={15} color="var(--accent-primary)" />
                     <span>Call: 6307164317</span>
                   </a>
                 </div>

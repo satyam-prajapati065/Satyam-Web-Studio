@@ -145,10 +145,10 @@ const Hero = () => {
             </div>
 
             {/* Floating Badge 1: React.js */}
-            <div className="animate-float" style={{
+            <div className="animate-float hero-badge-floating" style={{
               position: 'absolute',
               top: '-18px',
-              left: '-20px',
+              left: '-15px',
               background: '#FFFFFF',
               border: '1px solid var(--border-color)',
               borderRadius: 'var(--radius-lg)',
@@ -169,10 +169,10 @@ const Hero = () => {
             </div>
 
             {/* Floating Badge 2: Performance Score */}
-            <div className="animate-float" style={{
+            <div className="animate-float hero-badge-floating" style={{
               position: 'absolute',
               bottom: '-20px',
-              right: '-15px',
+              right: '-10px',
               background: '#FFFFFF',
               border: '1px solid var(--border-color)',
               borderRadius: 'var(--radius-lg)',
