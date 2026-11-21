@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Navbar from '../components/common/Navbar';
 import DeviceFrame from '../components/common/DeviceFrame';
 import api from '../services/api';
 
@@ -87,14 +88,17 @@ const LiveDemoPage = () => {
   }
 
   return (
-    <DeviceFrame
-      templateTitle={template?.title || 'Live Website Demo'}
-      templateCategory={template?.category || 'Showcase'}
-      onBookTemplate={handleInquire}
-      demoUrl={template?.demoUrl}
-    >
-      {renderDemoContent()}
-    </DeviceFrame>
+    <div style={{ paddingTop: 'var(--header-height)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Navbar />
+      <DeviceFrame
+        templateTitle={template?.title || 'Live Website Demo'}
+        templateCategory={template?.category || 'Showcase'}
+        onBookTemplate={handleInquire}
+        demoUrl={template?.demoUrl}
+      >
+        {renderDemoContent()}
+      </DeviceFrame>
+    </div>
   );
 };
 

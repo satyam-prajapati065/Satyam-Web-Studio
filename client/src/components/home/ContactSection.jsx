@@ -135,10 +135,10 @@ const ContactSection = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-whatsapp btn-block btn-lg"
-                  style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
+                  style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', textAlign: 'center' }}
                 >
-                  <MessageSquare size={20} fill="#FFFFFF" color="#25D366" />
-                  <span>Chat on WhatsApp (+91 95540 79669)</span>
+                  <MessageSquare size={19} fill="#FFFFFF" color="#25D366" style={{ flexShrink: 0 }} />
+                  <span>Chat on WhatsApp</span>
                 </a>
 
                 <div className="contact-call-actions">
@@ -361,10 +361,10 @@ const ContactSection = () => {
                 type="submit"
                 disabled={loading}
                 className="btn btn-whatsapp btn-block btn-lg"
-                style={{ fontSize: '1.05rem', padding: '0.95rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.65rem' }}
+                style={{ fontSize: '1rem', padding: '0.85rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.65rem' }}
               >
-                <MessageSquare size={20} fill="#FFFFFF" color="#25D366" />
-                <span>{loading ? 'Opening WhatsApp...' : 'Send Inquiry Directly on WhatsApp'}</span>
+                <MessageSquare size={19} fill="#FFFFFF" color="#25D366" style={{ flexShrink: 0 }} />
+                <span>{loading ? 'Opening WhatsApp...' : 'Send Inquiry on WhatsApp'}</span>
               </button>
               <div style={{ textAlign: 'center', fontSize: '0.84rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
                 🟢 <strong>Direct WhatsApp:</strong> Click karne par aapke saare project details seedhe Satyam ke WhatsApp par pre-filled bhej diye jaayenge.

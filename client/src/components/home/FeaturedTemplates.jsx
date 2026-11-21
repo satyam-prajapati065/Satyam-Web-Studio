@@ -33,8 +33,19 @@ const FeaturedTemplates = ({ templates = [] }) => {
                 flexDirection: 'column'
               }}
             >
-              {/* Thumbnail Container */}
-              <div style={{ position: 'relative', height: '220px', overflow: 'hidden', background: '#F8FAFC' }}>
+              {/* Thumbnail Container (Clickable Link to Detail Page) */}
+              <Link
+                to={`/templates/${tpl.slug || tpl._id}`}
+                style={{
+                  position: 'relative',
+                  height: '220px',
+                  overflow: 'hidden',
+                  background: '#F8FAFC',
+                  display: 'block',
+                  cursor: 'pointer'
+                }}
+                title={`View ${tpl.title} Specifications`}
+              >
                 <img
                   src={tpl.thumbnail}
                   alt={tpl.title}
@@ -54,7 +65,7 @@ const FeaturedTemplates = ({ templates = [] }) => {
                 <span className="badge" style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(15, 23, 42, 0.75)', color: '#FFFFFF', backdropFilter: 'blur(4px)', fontSize: '0.7rem' }}>
                   {tpl.templateId}
                 </span>
-              </div>
+              </Link>
 
               {/* Body */}
               <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
@@ -77,11 +88,11 @@ const FeaturedTemplates = ({ templates = [] }) => {
                 </div>
 
                 {/* Action Buttons */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+                <div className="template-card-actions">
                   <Link
                     to={tpl.demoUrl || `/demo/${tpl.demoSlug || tpl.slug}`}
                     className="btn btn-outline btn-sm"
-                    style={{ padding: '0.55rem 0.75rem' }}
+                    style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
                   >
                     <Eye size={15} />
                     <span>Live Demo</span>
@@ -92,7 +103,7 @@ const FeaturedTemplates = ({ templates = [] }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-whatsapp btn-sm"
-                    style={{ padding: '0.55rem 0.75rem', textDecoration: 'none' }}
+                    style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
                   >
                     <MessageSquare size={14} fill="#FFFFFF" color="#25D366" />
                     <span>WhatsApp</span>

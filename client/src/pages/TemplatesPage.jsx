@@ -82,21 +82,9 @@ const TemplatesPage = () => {
 
       <div className="container" style={{ marginTop: '2.5rem' }}>
         {/* Controls Bar: Search & Sort */}
-        <div style={{
-          background: '#FFFFFF',
-          border: '1px solid var(--border-color)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '1.25rem 1.5rem',
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: '2rem',
-          boxShadow: 'var(--shadow-sm)'
-        }}>
+        <div className="template-controls-bar">
           {/* Search Input */}
-          <div style={{ position: 'relative', flex: 1, minWidth: '240px' }}>
+          <div className="template-search-wrap">
             <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
@@ -109,7 +97,7 @@ const TemplatesPage = () => {
           </div>
 
           {/* Sort Selector */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <div className="template-sort-wrap">
             <ArrowUpDown size={16} color="var(--text-muted)" />
             <select
               value={sortOption}
@@ -127,14 +115,34 @@ const TemplatesPage = () => {
 
         {/* Categories Pills Filter */}
         <div style={{ marginBottom: '2rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.85rem' }}>
-            <Filter size={16} color="var(--accent-primary)" />
-            <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-              Filter by Industry ({categories.length} Categories):
-            </span>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Filter size={16} color="var(--accent-primary)" />
+              <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                Filter by Industry ({categories.length} Categories):
+              </span>
+            </div>
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', maxHeight: '160px', overflowY: 'auto', padding: '0.4rem 0' }}>
+          {/* Mobile Fast Category Dropdown */}
+          <div className="template-category-mobile-select">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="form-control"
+              style={{ fontWeight: 600, background: 'var(--bg-blue-soft)', borderColor: 'var(--accent-primary-light)' }}
+            >
+              <option value="all">📁 All Categories ({categories.reduce((acc, c) => acc + (c.templateCount || 1), 0)} Templates)</option>
+              {categories.map((cat) => (
+                <option key={cat.slug} value={cat.slug}>
+                  {cat.name} ({cat.templateCount || 1})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Horizontal Swipeable on Mobile, Wrapped on Desktop */}
+          <div className="template-categories-scroll">
             <button
               onClick={() => setSelectedCategory('all')}
               style={{
@@ -143,6 +151,8 @@ const TemplatesPage = () => {
                 fontSize: '0.85rem',
                 fontWeight: 600,
                 cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
                 border: selectedCategory === 'all' ? '1.5px solid var(--accent-primary)' : '1px solid var(--border-color)',
                 background: selectedCategory === 'all' ? 'var(--bg-blue-soft)' : '#FFFFFF',
                 color: selectedCategory === 'all' ? 'var(--accent-primary)' : 'var(--text-secondary)'
@@ -161,6 +171,8 @@ const TemplatesPage = () => {
                   fontSize: '0.85rem',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                   border: selectedCategory === cat.slug ? '1.5px solid var(--accent-primary)' : '1px solid var(--border-color)',
                   background: selectedCategory === cat.slug ? 'var(--bg-blue-soft)' : '#FFFFFF',
                   color: selectedCategory === cat.slug ? 'var(--accent-primary)' : 'var(--text-secondary)'
@@ -229,8 +241,19 @@ const TemplatesPage = () => {
                   flexDirection: 'column'
                 }}
               >
-                {/* Thumbnail */}
-                <div style={{ position: 'relative', height: '220px', overflow: 'hidden', background: '#F8FAFC' }}>
+                {/* Thumbnail (Clickable Link to Detail Page) */}
+                <Link
+                  to={`/templates/${tpl.slug || tpl._id}`}
+                  style={{
+                    position: 'relative',
+                    height: '220px',
+                    overflow: 'hidden',
+                    background: '#F8FAFC',
+                    display: 'block',
+                    cursor: 'pointer'
+                  }}
+                  title={`View ${tpl.title} Specifications`}
+                >
                   <img
                     src={tpl.thumbnail}
                     alt={tpl.title}
@@ -250,7 +273,7 @@ const TemplatesPage = () => {
                   <span className="badge" style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(15, 23, 42, 0.75)', color: '#FFFFFF', backdropFilter: 'blur(4px)', fontSize: '0.7rem' }}>
                     {tpl.templateId}
                   </span>
-                </div>
+                </Link>
 
                 {/* Content */}
                 <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
@@ -273,11 +296,11 @@ const TemplatesPage = () => {
                   </div>
 
                   {/* Buttons */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border-color)' }}>
+                  <div className="template-card-actions">
                     <Link
                       to={tpl.demoUrl || `/demo/${tpl.demoSlug || tpl.slug}`}
                       className="btn btn-outline btn-sm"
-                      style={{ padding: '0.55rem 0.75rem' }}
+                      style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
                     >
                       <Eye size={15} />
                       <span>Live Demo</span>
@@ -288,7 +311,7 @@ const TemplatesPage = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-whatsapp btn-sm"
-                      style={{ padding: '0.55rem 0.75rem', textDecoration: 'none' }}
+                      style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
                     >
                       <MessageSquare size={14} fill="#FFFFFF" color="#25D366" />
                       <span>WhatsApp</span>

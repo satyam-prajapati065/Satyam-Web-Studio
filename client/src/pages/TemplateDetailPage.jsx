@@ -84,16 +84,16 @@ const TemplateDetailPage = () => {
           <div>
             <div className="card" style={{ padding: 0, overflow: 'hidden', boxShadow: 'var(--shadow-xl)', border: '1px solid var(--border-color)', marginBottom: '1.5rem' }}>
               {/* Mock Browser Topbar */}
-              <div style={{ background: 'var(--bg-secondary)', padding: '0.75rem 1.25rem', borderBottom: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', gap: '6px' }}>
+              <div style={{ background: 'var(--bg-secondary)', padding: '0.75rem 1.25rem', borderBottom: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
                   <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#EF4444' }} />
                   <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#F59E0B' }} />
                   <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10B981' }} />
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'monospace' }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'monospace', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   https://satyamwebstudio.com/demo/{template.slug}
                 </div>
-                <span className="badge badge-emerald" style={{ fontSize: '0.68rem', padding: '0.15rem 0.5rem' }}>
+                <span className="badge badge-emerald" style={{ fontSize: '0.68rem', padding: '0.15rem 0.5rem', flexShrink: 0 }}>
                   Live Preview Ready
                 </span>
               </div>
@@ -109,7 +109,7 @@ const TemplateDetailPage = () => {
             </div>
 
             {/* Direct Dual Action CTAs */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div className="template-detail-actions">
               <Link
                 to={template.demoUrl || `/demo/${template.demoSlug || template.slug}`}
                 className="btn btn-outline btn-lg"
@@ -149,15 +149,12 @@ const TemplateDetailPage = () => {
             </p>
 
             {/* Spec Matrix */}
-            <div style={{
+            <div className="template-spec-matrix" style={{
               background: 'var(--bg-secondary)',
               border: '1px solid var(--border-color)',
               borderRadius: 'var(--radius-lg)',
               padding: '1.5rem',
-              marginBottom: '2rem',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1.25rem'
+              marginBottom: '2rem'
             }}>
               <div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Design Direction</div>
@@ -264,7 +261,9 @@ const TemplateDetailPage = () => {
             <div className="grid-3">
               {related.map(r => (
                 <div key={r._id || r.templateId} className="card" style={{ padding: 0, overflow: 'hidden' }}>
-                  <img src={r.thumbnail} alt={r.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+                  <Link to={`/templates/${r.slug || r._id || r.templateId}`} style={{ display: 'block', overflow: 'hidden', height: '180px' }} title={`View ${r.title}`}>
+                    <img src={r.thumbnail} alt={r.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'} />
+                  </Link>
                   <div style={{ padding: '1.25rem' }}>
                     <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>{r.title}</h3>
                     <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>{r.shortDescription}</p>
