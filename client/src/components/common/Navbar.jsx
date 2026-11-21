@@ -49,12 +49,17 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact', icon: Mail }
   ];
 
+  const handleNavClick = () => {
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container navbar-container">
           {/* Brand Logo */}
-          <Link to="/" className="navbar-logo" onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/" className="navbar-logo" onClick={handleNavClick}>
             <div className="navbar-logo-icon">
               <Code2 size={20} strokeWidth={2.5} />
             </div>
@@ -69,6 +74,7 @@ const Navbar = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
+                onClick={handleNavClick}
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
               >
                 {item.name}
@@ -148,7 +154,7 @@ const Navbar = () => {
                   <NavLink
                     key={item.path}
                     to={item.path}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={handleNavClick}
                     className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>

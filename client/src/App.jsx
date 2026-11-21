@@ -1,6 +1,9 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
+// Utility
+import ScrollToTop from './components/common/ScrollToTop';
+
 // Layouts
 import MainLayout from './layouts/MainLayout';
 
@@ -18,7 +21,9 @@ import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       {/* Standalone Live Demo Viewer (With Responsive Device Frame) */}
       <Route path="/demo/:demoSlug" element={<LiveDemoPage />} />
 
@@ -35,6 +40,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
+    </>
   );
 }
 
