@@ -12,7 +12,7 @@ const ContactSection = () => {
     phone: '',
     businessType: 'Small Business / Startup',
     websiteType: 'Business Website',
-    budget: '$500 - $1,500',
+    budget: '₹5,000 – ₹12,000',
     projectDetails: '',
     templateName: ''
   });
@@ -319,13 +319,18 @@ const ContactSection = () => {
                     onChange={handleChange}
                     className="form-control"
                   >
-                    <option value="₹10,000 - ₹25,000">₹10,000 - ₹25,000 (Landing Page)</option>
-                    <option value="₹25,000 - ₹50,000">₹25,000 - ₹50,000 (Business Website)</option>
-                    <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000 (E-commerce / App)</option>
-                    <option value="₹1,00,000+">₹1,00,000+ (Custom Platform)</option>
-                    <option value="$300 - $600 (USD)">$300 - $600 USD (International)</option>
-                    <option value="$600 - $1,500 (USD)">$600 - $1,500 USD (International)</option>
-                    <option value="$1,500+ (USD)">$1,500+ USD (International)</option>
+                    <optgroup label="India (INR Pricing)">
+                      <option value="₹5,000 – ₹12,000">₹5,000 – ₹12,000 (Landing Page — Starting ₹5,999)</option>
+                      <option value="₹12,000 – ₹25,000">₹12,000 – ₹25,000 (Business Website — Starting ₹14,999)</option>
+                      <option value="₹25,000 – ₹60,000">₹25,000 – ₹60,000 (E-commerce — Starting ₹29,999)</option>
+                      <option value="₹50,000 – ₹1,50,000+">₹50,000 – ₹1,50,000+ (Custom Web Application — Starting ₹49,999)</option>
+                    </optgroup>
+                    <optgroup label="International Clients (USD)">
+                      <option value="$150 – $300 USD">$150 – $300 USD (Landing Page)</option>
+                      <option value="$300 – $700 USD">$300 – $700 USD (Business Website)</option>
+                      <option value="$700 – $1,500 USD">$700 – $1,500 USD (E-commerce)</option>
+                      <option value="$1,500+ USD">$1,500+ USD (Custom Platform)</option>
+                    </optgroup>
                   </select>
                 </div>
               </div>
