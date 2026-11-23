@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import {
-  Search, Filter, Eye, Send, Sparkles, Layers,
-  ChevronDown, ArrowUpDown, X, Check, MessageSquare
+  Search, Filter, Eye, Sparkles, Layers,
+  ChevronDown, ChevronUp, ChevronLeft, ChevronRight,
+  ArrowUpDown, X, Check, MessageSquare, Folder, Grid
 } from 'lucide-react';
 import api from '../services/api';
 
@@ -14,6 +15,15 @@ const TemplatesPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('featured');
   const [loading, setLoading] = useState(true);
+  const [showAllCategories, setShowAllCategories] = useState(false);
+  const scrollContainerRef = useRef(null);
+
+  const scrollCategories = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === 'left' ? -320 : 320;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   // Read ?category= query param on load
   useEffect(() => {
@@ -81,106 +91,168 @@ const TemplatesPage = () => {
       </section>
 
       <div className="container" style={{ marginTop: '2.5rem' }}>
-        {/* Controls Bar: Search & Sort */}
-        <div className="template-controls-bar">
-          {/* Search Input */}
-          <div className="template-search-wrap">
-            <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
-            <input
-              type="text"
-              placeholder="Search templates by industry, feature, or tech..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="form-control"
-              style={{ paddingLeft: '2.4rem' }}
-            />
-          </div>
+        {/* Modern Unified Command Card */}
+        <div className="filter-search-card">
+          {/* Top Row: Search Input + Category Dropdown + Sort Dropdown */}
+          <div className="filter-search-top-row">
+            {/* Search Input */}
+            <div className="filter-search-input-box">
+              <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
+              <input
+                type="text"
+                placeholder="Search by industry, technology, or keywords..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-muted)' }}
+                  title="Clear search"
+                  type="button"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
 
-          {/* Sort Selector */}
-          <div className="template-sort-wrap">
-            <ArrowUpDown size={16} color="var(--text-muted)" />
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-              className="form-control"
-              style={{ width: 'auto', paddingRight: '2rem' }}
-            >
-              <option value="featured">Featured First</option>
-              <option value="title-asc">Alphabetical (A-Z)</option>
-              <option value="title-desc">Alphabetical (Z-A)</option>
-              <option value="oldest">Oldest First</option>
-            </select>
-          </div>
-        </div>
+            {/* Dropdown Filters Group */}
+            <div className="filter-controls-group">
+              {/* Category Quick Select Dropdown */}
+              <div className="filter-select-wrapper">
+                <Folder size={16} color="var(--accent-primary)" style={{ position: 'absolute', left: '12px', pointerEvents: 'none' }} />
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  style={{ paddingLeft: '2.4rem' }}
+                >
+                  <option value="all">📁 All Industries ({categories.reduce((acc, c) => acc + (c.templateCount || 1), 0)})</option>
+                  {categories.map((cat) => (
+                    <option key={cat.slug} value={cat.slug}>
+                      {cat.name} ({cat.templateCount || 1})
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown size={15} color="var(--text-muted)" style={{ position: 'absolute', right: '12px', pointerEvents: 'none' }} />
+              </div>
 
-        {/* Categories Pills Filter */}
-        <div style={{ marginBottom: '2rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Filter size={16} color="var(--accent-primary)" />
-              <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                Filter by Industry ({categories.length} Categories):
-              </span>
+              {/* Sort Select Dropdown */}
+              <div className="filter-select-wrapper">
+                <ArrowUpDown size={15} color="var(--accent-primary)" style={{ position: 'absolute', left: '12px', pointerEvents: 'none' }} />
+                <select
+                  value={sortOption}
+                  onChange={(e) => setSortOption(e.target.value)}
+                  style={{ paddingLeft: '2.4rem' }}
+                >
+                  <option value="featured">Featured First</option>
+                  <option value="title-asc">Alphabetical (A-Z)</option>
+                  <option value="title-desc">Alphabetical (Z-A)</option>
+                  <option value="oldest">Oldest First</option>
+                </select>
+                <ChevronDown size={15} color="var(--text-muted)" style={{ position: 'absolute', right: '12px', pointerEvents: 'none' }} />
+              </div>
+
+              {(selectedCategory !== 'all' || searchQuery) && (
+                <button
+                  onClick={clearFilters}
+                  className="btn btn-outline btn-sm"
+                  style={{ height: '48px', padding: '0 1rem', gap: '0.4rem', color: 'var(--color-danger)', borderColor: 'rgba(239, 68, 68, 0.3)' }}
+                  type="button"
+                >
+                  <X size={15} />
+                  <span>Reset</span>
+                </button>
+              )}
             </div>
           </div>
 
-          {/* Mobile Fast Category Dropdown */}
-          <div className="template-category-mobile-select">
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="form-control"
-              style={{ fontWeight: 600, background: 'var(--bg-blue-soft)', borderColor: 'var(--accent-primary-light)' }}
-            >
-              <option value="all">📁 All Categories ({categories.reduce((acc, c) => acc + (c.templateCount || 1), 0)} Templates)</option>
-              {categories.map((cat) => (
-                <option key={cat.slug} value={cat.slug}>
-                  {cat.name} ({cat.templateCount || 1})
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Bottom Row: Sleek Category Pills Ribbon or Expandable Grid */}
+          <div className="category-ribbon-section">
+            <div className="category-ribbon-header">
+              <div className="category-ribbon-title">
+                <Sparkles size={14} color="var(--accent-primary)" />
+                <span>Categories ({categories.length}):</span>
+              </div>
 
-          {/* Horizontal Swipeable on Mobile, Wrapped on Desktop */}
-          <div className="template-categories-scroll">
-            <button
-              onClick={() => setSelectedCategory('all')}
-              style={{
-                padding: '0.45rem 1rem',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-                border: selectedCategory === 'all' ? '1.5px solid var(--accent-primary)' : '1px solid var(--border-color)',
-                background: selectedCategory === 'all' ? 'var(--bg-blue-soft)' : '#FFFFFF',
-                color: selectedCategory === 'all' ? 'var(--accent-primary)' : 'var(--text-secondary)'
-              }}
-            >
-              All Categories ({categories.reduce((acc, c) => acc + (c.templateCount || 1), 0)})
-            </button>
-
-            {categories.map((cat) => (
               <button
-                key={cat.slug}
-                onClick={() => setSelectedCategory(cat.slug)}
-                style={{
-                  padding: '0.45rem 1rem',
-                  borderRadius: 'var(--radius-full)',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                  border: selectedCategory === cat.slug ? '1.5px solid var(--accent-primary)' : '1px solid var(--border-color)',
-                  background: selectedCategory === cat.slug ? 'var(--bg-blue-soft)' : '#FFFFFF',
-                  color: selectedCategory === cat.slug ? 'var(--accent-primary)' : 'var(--text-secondary)'
-                }}
+                onClick={() => setShowAllCategories(!showAllCategories)}
+                className="category-toggle-expand-btn"
+                type="button"
+                title={showAllCategories ? 'Collapse to single row' : 'Show all categories in grid'}
               >
-                {cat.name} {cat.templateCount > 0 && `(${cat.templateCount})`}
+                <Grid size={13} />
+                <span>{showAllCategories ? 'Collapse Row' : `View All (${categories.length})`}</span>
+                {showAllCategories ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
               </button>
-            ))}
+            </div>
+
+            {/* Smooth Ribbon with Left/Right Arrows */}
+            {!showAllCategories ? (
+              <div className="category-ribbon-row">
+                <button
+                  onClick={() => scrollCategories('left')}
+                  className="category-nav-arrow"
+                  aria-label="Scroll left"
+                  type="button"
+                  title="Scroll Left"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+
+                <div className="category-scroll-strip" ref={scrollContainerRef}>
+                  <button
+                    onClick={() => setSelectedCategory('all')}
+                    className={`category-pill-btn ${selectedCategory === 'all' ? 'active' : ''}`}
+                    type="button"
+                  >
+                    All Categories ({categories.reduce((acc, c) => acc + (c.templateCount || 1), 0)})
+                  </button>
+
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.slug}
+                      onClick={() => setSelectedCategory(cat.slug)}
+                      className={`category-pill-btn ${selectedCategory === cat.slug ? 'active' : ''}`}
+                      type="button"
+                    >
+                      {cat.name} {cat.templateCount > 0 && `(${cat.templateCount})`}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => scrollCategories('right')}
+                  className="category-nav-arrow"
+                  aria-label="Scroll right"
+                  type="button"
+                  title="Scroll Right"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            ) : (
+              /* Expanded Clean Tag Cloud Grid */
+              <div className="category-expanded-grid">
+                <button
+                  onClick={() => setSelectedCategory('all')}
+                  className={`category-pill-btn ${selectedCategory === 'all' ? 'active' : ''}`}
+                  type="button"
+                >
+                  All Categories ({categories.reduce((acc, c) => acc + (c.templateCount || 1), 0)})
+                </button>
+
+                {categories.map((cat) => (
+                  <button
+                    key={cat.slug}
+                    onClick={() => setSelectedCategory(cat.slug)}
+                    className={`category-pill-btn ${selectedCategory === cat.slug ? 'active' : ''}`}
+                    type="button"
+                  >
+                    {cat.name} {cat.templateCount > 0 && `(${cat.templateCount})`}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
