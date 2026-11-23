@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import { ExternalLink, Github, Sparkles, CheckCircle2, MessageSquare } from 'lucide-react';
 import api from '../services/api';
 
@@ -26,6 +27,11 @@ const ProjectsPage = () => {
 
   return (
     <div style={{ paddingBottom: '6rem' }}>
+      <SEO
+        title="Web Development Projects & Portfolio | Satyam Web Studio"
+        description="Explore real-world client websites, production web applications, and open-source projects crafted by Satyam Prajapati. High-performance, responsive code."
+        keywords="Web Development Portfolio, Satyam Prajapati Projects, React Developer Portfolio, MERN Stack Projects, Client Website Examples"
+      />
       {/* Top Banner */}
       <section className="section section-soft-blue" style={{ padding: '4.5rem 0 3.5rem 0' }}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '820px' }}>

@@ -1,0 +1,11 @@
+# ==========================================
+# Robots.txt - Satyam Web Studio
+# https://satyamwebstudio.netlify.app/
+# ==========================================
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Primary XML Sitemap for Google Search Console & Bing Webmaster
+Sitemap: https://satyamwebstudio.netlify.app/sitemap.xml

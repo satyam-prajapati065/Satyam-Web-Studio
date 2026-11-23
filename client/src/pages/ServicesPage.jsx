@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import {
   Code, Briefcase, ShoppingBag, Flame, Sparkles,
   Server, ShieldCheck, Zap, ArrowRight, CheckCircle2, AlertCircle, MessageSquare
@@ -29,6 +30,11 @@ const ServicesPage = () => {
 
   return (
     <div style={{ paddingBottom: '6rem' }}>
+      <SEO
+        title="Web Development & Design Services | Satyam Web Studio"
+        description="Full-stack web development services by Satyam Prajapati. Custom React websites, MERN web applications, e-commerce stores, speed optimization, and UI/UX design in Delhi NCR."
+        keywords="Web Development Services, Custom Website Design, React Developer Delhi, MERN Stack Agency, E-commerce Development India, Satyam Prajapati Services"
+      />
       {/* Top Banner */}
       <section className="section section-soft-blue" style={{ padding: '4.5rem 0 3.5rem 0' }}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '820px' }}>

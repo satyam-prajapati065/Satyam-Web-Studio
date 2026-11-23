@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import {
   Search, Filter, Eye, Sparkles, Layers,
   ChevronDown, ChevronUp, ChevronLeft, ChevronRight,
@@ -74,6 +75,11 @@ const TemplatesPage = () => {
 
   return (
     <div style={{ paddingBottom: '5rem' }}>
+      <SEO
+        title="Interactive Website Templates & Demos | Satyam Web Studio"
+        description="Explore 35+ production-ready, responsive website templates across e-commerce, SaaS, healthcare, real estate, and corporate. Live interactive preview by Satyam Prajapati."
+        keywords="Website Templates, React Website Templates, HTML5 Responsive Templates, E-commerce Store Template, SaaS Website Template, Satyam Web Studio Templates"
+      />
       {/* Top Banner */}
       <section className="section section-soft-blue" style={{ padding: '4rem 0 3rem 0' }}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>

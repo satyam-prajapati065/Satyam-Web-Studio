@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import {
   Code2, CheckCircle2, Award, Zap, Heart, Terminal,
   Send, ArrowRight, ShieldCheck, Laptop, Globe
@@ -8,6 +9,11 @@ import {
 const AboutPage = () => {
   return (
     <div style={{ paddingBottom: '5rem' }}>
+      <SEO
+        title="About Satyam Prajapati | Full-Stack Web & React.js Developer"
+        description="Learn more about Satyam Prajapati, founder of Satyam Web Studio. Passionate full-stack developer specializing in modern React.js web apps, clean code, and business digital growth."
+        keywords="About Satyam Prajapati, Satyam Prajapati Bio, Full Stack Developer Delhi NCR, React.js Expert India, Satyam Web Studio Founder"
+      />
       {/* Hero Header */}
       <section className="section section-soft-blue" style={{ padding: '4.5rem 0 3.5rem 0' }}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '820px' }}>

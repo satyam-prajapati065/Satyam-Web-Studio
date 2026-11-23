@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
+import SEO from '../components/common/SEO';
 import Hero from '../components/home/Hero';
 import TrustSkills from '../components/home/TrustSkills';
 import CategoriesShowcase from '../components/home/CategoriesShowcase';
@@ -47,6 +48,11 @@ const HomePage = () => {
 
   return (
     <div>
+      <SEO
+        title="Satyam Web Studio | Best Freelance Web Developer & Website Design in Delhi NCR"
+        description="Satyam Web Studio by Satyam Prajapati — Top-rated Full-Stack Web & React.js Developer in Delhi NCR, India. Custom websites, e-commerce, modern SaaS web apps, and 35+ interactive website templates."
+        keywords="Satyam Web Studio, Satyam Prajapati, Freelance Web Developer Delhi NCR, Best Website Developer India, Hire React Developer Delhi, MERN Stack Developer Freelancer, Custom Website Development"
+      />
       <Hero />
       <TrustSkills />
       <CategoriesShowcase categories={categories} />

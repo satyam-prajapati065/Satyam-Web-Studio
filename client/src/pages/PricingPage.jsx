@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import { Check, ArrowRight, Sparkles, HelpCircle, ChevronDown, MessageSquare } from 'lucide-react';
 import api from '../services/api';
 
@@ -46,6 +47,11 @@ const PricingPage = () => {
 
   return (
     <div style={{ paddingBottom: '6rem' }}>
+      <SEO
+        title="Transparent Website Pricing & Packages | Satyam Web Studio"
+        description="Affordable, transparent website development pricing plans for startups, local businesses, and enterprises. No hidden fees. Custom quotes with WhatsApp support."
+        keywords="Website Development Cost India, Affordable Web Design Pricing, Freelance Developer Rates Delhi NCR, Website Packages"
+      />
       {/* Top Banner */}
       <section className="section section-soft-blue" style={{ padding: '4.5rem 0 3.5rem 0' }}>
         <div className="container" style={{ textAlign: 'center', maxWidth: '820px' }}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import Navbar from '../components/common/Navbar';
 import DeviceFrame from '../components/common/DeviceFrame';
 import api from '../services/api';
@@ -89,6 +90,11 @@ const LiveDemoPage = () => {
 
   return (
     <div style={{ paddingTop: 'var(--header-height)', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <SEO
+        title={`Live Demo: ${template?.title || demoSlug}`}
+        description={`Interactive live preview of ${template?.title || demoSlug} template. Test desktop, tablet, and mobile responsive viewports.`}
+        keywords={`${template?.title}, Live Demo, Website Preview, ${template?.category}, Satyam Web Studio`}
+      />
       <Navbar />
       <DeviceFrame
         templateTitle={template?.title || 'Live Website Demo'}

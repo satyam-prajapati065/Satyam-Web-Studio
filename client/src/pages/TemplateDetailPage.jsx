@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import SEO from '../components/common/SEO';
 import { Eye, MessageSquare, ArrowLeft, CheckCircle2, Phone } from 'lucide-react';
 import api from '../services/api';
 
@@ -58,6 +59,11 @@ const TemplateDetailPage = () => {
 
   return (
     <div style={{ padding: '3rem 0 6rem 0' }}>
+      <SEO
+        title={`${template.title} | Website Template Specs`}
+        description={template.shortDescription || template.fullDescription}
+        keywords={`${template.title}, ${template.category} template, React template, buy website, Satyam Web Studio`}
+      />
       <div className="container">
         {/* Breadcrumb & Navigation */}
         <div style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
