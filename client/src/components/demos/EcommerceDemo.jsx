@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   ShoppingBag, Search, Heart, X, Plus, Minus, Check, ArrowRight,
-  Filter, Star, Truck, RefreshCw, ShieldCheck
+  Filter, Star, Truck, RefreshCw, ShieldCheck, Menu
 } from 'lucide-react';
 
 const EcommerceDemo = ({ onInquire }) => {
@@ -9,6 +9,7 @@ const EcommerceDemo = ({ onInquire }) => {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const products = [
     {
@@ -100,16 +101,12 @@ const EcommerceDemo = ({ onInquire }) => {
   return (
     <div style={{ fontFamily: 'var(--font-body)', background: '#FFFFFF', color: '#172033', minHeight: '100%' }}>
       {/* Top Banner */}
-      <div style={{ background: '#172033', color: '#F8FAFC', padding: '0.45rem 1rem', textAlign: 'center', fontSize: '0.8rem', fontWeight: 500 }}>
+      <div className="demo-top-bar" style={{ background: '#172033', color: '#F8FAFC', padding: '0.45rem 1rem', textAlign: 'center', fontSize: '0.8rem', fontWeight: 500 }}>
         ✨ Complimentary Worldwide Express Delivery on orders over $150
       </div>
 
       {/* Nav */}
-      <header style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '1.25rem 2rem',
+      <header className="demo-navbar-header" style={{
         borderBottom: '1px solid #E2E8F0',
         background: '#FFFFFF'
       }}>
@@ -118,7 +115,7 @@ const EcommerceDemo = ({ onInquire }) => {
         </div>
 
         {/* Categories Nav */}
-        <div style={{ display: 'none', md: 'flex', gap: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>
+        <div className="demo-desktop-links" style={{ gap: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>
           {categories.slice(0, 5).map(c => (
             <span
               key={c}
@@ -134,8 +131,8 @@ const EcommerceDemo = ({ onInquire }) => {
           ))}
         </div>
 
-        {/* Cart Icon & Button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        {/* Cart Icon & Mobile Hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <button
             onClick={() => setIsCartOpen(true)}
             style={{
@@ -146,8 +143,10 @@ const EcommerceDemo = ({ onInquire }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              border: 'none'
             }}
+            aria-label="View Shopping Cart"
           >
             <ShoppingBag size={20} color="#0F172A" />
             {cartCount > 0 && (
@@ -170,8 +169,36 @@ const EcommerceDemo = ({ onInquire }) => {
               </span>
             )}
           </button>
+          <button
+            className="demo-hamburger-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Categories</div>
+        {categories.map(c => (
+          <span
+            key={c}
+            onClick={() => { setSelectedCategory(c); setMobileMenuOpen(false); }}
+            style={{
+              padding: '0.6rem 0',
+              fontWeight: selectedCategory === c ? 700 : 500,
+              color: selectedCategory === c ? '#3B82F6' : '#1E293B',
+              cursor: 'pointer',
+              borderBottom: '1px solid #F1F5F9',
+              display: 'block'
+            }}
+          >
+            {c}
+          </span>
+        ))}
+      </div>
 
       {/* Hero Showcase */}
       <div style={{

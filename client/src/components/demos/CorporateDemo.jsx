@@ -1,28 +1,61 @@
 import React, { useState } from 'react';
-import { Briefcase, ChevronRight, BarChart2, ShieldCheck, Globe, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Briefcase, ChevronRight, BarChart2, ShieldCheck, Globe, CheckCircle2, ArrowRight, Menu, X } from 'lucide-react';
 
 const CorporateDemo = ({ onInquire }) => {
   const [calculatorBudget, setCalculatorBudget] = useState(5000);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div style={{ fontFamily: 'var(--font-body)', background: '#FFFFFF', color: '#172033' }}>
       {/* Executive Nav */}
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 2.5rem', borderBottom: '1px solid #E2E8F0' }}>
+      <header className="demo-navbar-header" style={{ borderBottom: '1px solid #E2E8F0', background: '#FFFFFF' }}>
         <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em' }}>
           VANGUARD<span style={{ color: '#3B82F6' }}>PARTNERS</span>
         </div>
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
-          <a href="#practices">Practices</a>
-          <a href="#insights">Insights</a>
-          <a href="#calculator">Advisory Estimator</a>
+        <div className="demo-desktop-links" style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
+          <a href="#practices" style={{ color: '#64748B', textDecoration: 'none' }}>Practices</a>
+          <a href="#insights" style={{ color: '#64748B', textDecoration: 'none' }}>Insights</a>
+          <a href="#calculator" style={{ color: '#64748B', textDecoration: 'none' }}>Advisory Estimator</a>
+        </div>
+        <div className="demo-desktop-action">
+          <button
+            onClick={onInquire}
+            style={{ background: '#0F172A', color: '#FFF', padding: '0.6rem 1.4rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem', border: 'none', cursor: 'pointer' }}
+          >
+            Engage Advisory
+          </button>
         </div>
         <button
-          onClick={onInquire}
-          style={{ background: '#0F172A', color: '#FFF', padding: '0.6rem 1.4rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem' }}
+          className="demo-hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <a href="#practices" onClick={() => setMobileMenuOpen(false)}>Practices</a>
+        <a href="#insights" onClick={() => setMobileMenuOpen(false)}>Insights</a>
+        <a href="#calculator" onClick={() => setMobileMenuOpen(false)}>Advisory Estimator</a>
+        <button
+          onClick={() => { setMobileMenuOpen(false); onInquire && onInquire(); }}
+          style={{
+            background: '#0F172A',
+            color: '#FFF',
+            padding: '0.75rem',
+            borderRadius: '6px',
+            fontWeight: 600,
+            fontSize: '0.95rem',
+            border: 'none',
+            cursor: 'pointer',
+            width: '100%'
+          }}
         >
           Engage Advisory
         </button>
-      </header>
+      </div>
 
       {/* Hero */}
       <section style={{ padding: '5rem 2.5rem 4rem 2.5rem', maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>

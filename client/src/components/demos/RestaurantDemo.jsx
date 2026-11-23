@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Utensils, Calendar, Clock, Users, Check, MapPin, Phone, Star } from 'lucide-react';
+import { Utensils, Calendar, Clock, Users, Check, MapPin, Phone, Star, Menu, X } from 'lucide-react';
 
 const RestaurantDemo = ({ onInquire }) => {
   const [activeMenuTab, setActiveMenuTab] = useState('pasta');
   const [reservation, setReservation] = useState({ date: '2026-11-25', time: '19:30', guests: '2', name: '', phone: '' });
   const [reserved, setReserved] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menu = {
     starters: [
@@ -36,7 +37,7 @@ const RestaurantDemo = ({ onInquire }) => {
   return (
     <div style={{ fontFamily: 'var(--font-body)', background: '#FFFFFF', color: '#172033' }}>
       {/* Top Bar */}
-      <div style={{ background: '#FFFDF9', borderBottom: '1px solid #F1E9DF', padding: '0.6rem 2rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: '#786858' }}>
+      <div className="demo-top-bar" style={{ background: '#FFFDF9', borderBottom: '1px solid #F1E9DF', padding: '0.6rem 2rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: '#786858' }}>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           <span><MapPin size={14} style={{ display: 'inline', verticalAlign: 'middle' }} /> 45 Via Roma, Florence • Downtown Flagship</span>
           <span><Clock size={14} style={{ display: 'inline', verticalAlign: 'middle' }} /> Open Daily: 5:00 PM – 11:30 PM</span>
@@ -47,19 +48,52 @@ const RestaurantDemo = ({ onInquire }) => {
       </div>
 
       {/* Nav */}
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 2rem', borderBottom: '1px solid #F1E9DF' }}>
+      <header className="demo-navbar-header" style={{ borderBottom: '1px solid #F1E9DF', background: '#FFFFFF' }}>
         <div style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '0.08em', color: '#2B1E12' }}>
           BELLA<span style={{ color: '#D97706' }}>CUCINA</span>
         </div>
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#6B5844' }}>
-          <a href="#menu">Chef's Menu</a>
-          <a href="#reserve">Reservations</a>
-          <a href="#story">Our Story</a>
+        <div className="demo-desktop-links" style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#6B5844' }}>
+          <a href="#menu" style={{ color: '#6B5844', textDecoration: 'none' }}>Chef's Menu</a>
+          <a href="#reserve" style={{ color: '#6B5844', textDecoration: 'none' }}>Reservations</a>
+          <a href="#story" style={{ color: '#6B5844', textDecoration: 'none' }}>Our Story</a>
         </div>
-        <a href="#reserve" style={{ background: '#2B1E12', color: '#FFF', padding: '0.55rem 1.35rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem' }}>
+        <div className="demo-desktop-action">
+          <a href="#reserve" style={{ background: '#2B1E12', color: '#FFF', padding: '0.55rem 1.35rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem', textDecoration: 'none' }}>
+            Book a Table
+          </a>
+        </div>
+        <button
+          className="demo-hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <a href="#menu" onClick={() => setMobileMenuOpen(false)}>Chef's Menu</a>
+        <a href="#reserve" onClick={() => setMobileMenuOpen(false)}>Reservations</a>
+        <a href="#story" onClick={() => setMobileMenuOpen(false)}>Our Story</a>
+        <a
+          href="#reserve"
+          onClick={() => setMobileMenuOpen(false)}
+          style={{
+            background: '#2B1E12',
+            color: '#FFF',
+            padding: '0.75rem',
+            borderRadius: '6px',
+            textAlign: 'center',
+            fontWeight: 600,
+            marginTop: '0.5rem',
+            textDecoration: 'none',
+            borderBottom: 'none'
+          }}
+        >
           Book a Table
         </a>
-      </header>
+      </div>
 
       {/* Hero */}
       <section style={{

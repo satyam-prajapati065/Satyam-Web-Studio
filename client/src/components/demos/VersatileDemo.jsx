@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {
   Globe, Sparkles, CheckCircle2, ArrowRight, Star, Mail,
-  Calendar, Phone, ShieldCheck, Heart, Award
+  Calendar, Phone, ShieldCheck, Heart, Award, Menu, X
 } from 'lucide-react';
 
 const VersatileDemo = ({ category = 'Web Platform', onInquire }) => {
+  const [inquirySent, setInquirySent] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleVersatileSubmit = (e) => {
     e.preventDefault();
     setInquirySent(true);
@@ -47,11 +49,7 @@ const VersatileDemo = ({ category = 'Web Platform', onInquire }) => {
   return (
     <div style={{ fontFamily: 'var(--font-body)', background: '#FFFFFF', color: '#172033' }}>
       {/* Universal Nav */}
-      <header style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1.25rem 2.5rem',
+      <header className="demo-navbar-header" style={{
         borderBottom: '1px solid #E2E8F0',
         background: '#FFFFFF'
       }}>
@@ -61,18 +59,51 @@ const VersatileDemo = ({ category = 'Web Platform', onInquire }) => {
           </div>
           <span>{category.toUpperCase()}<span style={{ color: '#3B82F6' }}>.IO</span></span>
         </div>
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
-          <a href="#about">Overview</a>
-          <a href="#features">Capabilities</a>
-          <a href="#inquiry">Get in Touch</a>
+        <div className="demo-desktop-links" style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
+          <a href="#about" style={{ color: '#64748B', textDecoration: 'none' }}>Overview</a>
+          <a href="#features" style={{ color: '#64748B', textDecoration: 'none' }}>Capabilities</a>
+          <a href="#inquiry" style={{ color: '#64748B', textDecoration: 'none' }}>Get in Touch</a>
+        </div>
+        <div className="demo-desktop-action">
+          <button
+            onClick={onInquire}
+            style={{ background: '#3B82F6', color: '#FFF', padding: '0.55rem 1.35rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem', border: 'none', cursor: 'pointer' }}
+          >
+            Request Website
+          </button>
         </div>
         <button
-          onClick={onInquire}
-          style={{ background: '#3B82F6', color: '#FFF', padding: '0.55rem 1.35rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem' }}
+          className="demo-hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
         >
-          Request Website Like This
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <a href="#about" onClick={() => setMobileMenuOpen(false)}>Overview</a>
+        <a href="#features" onClick={() => setMobileMenuOpen(false)}>Capabilities</a>
+        <a href="#inquiry" onClick={() => setMobileMenuOpen(false)}>Get in Touch</a>
+        <button
+          onClick={() => { setMobileMenuOpen(false); onInquire && onInquire(); }}
+          style={{
+            background: '#3B82F6',
+            color: '#FFF',
+            padding: '0.75rem',
+            borderRadius: '6px',
+            textAlign: 'center',
+            fontWeight: 600,
+            fontSize: '0.95rem',
+            border: 'none',
+            cursor: 'pointer',
+            width: '100%'
+          }}
+        >
+          Request Website
+        </button>
+      </div>
 
       {/* Hero */}
       <section style={{

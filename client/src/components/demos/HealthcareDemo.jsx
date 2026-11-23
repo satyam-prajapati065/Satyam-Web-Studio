@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Activity, Phone, Calendar, Clock, Check, UserCheck, Shield, Award, Stethoscope } from 'lucide-react';
+import { Activity, Phone, Calendar, Clock, Check, UserCheck, Shield, Award, Stethoscope, Menu, X } from 'lucide-react';
 
 const HealthcareDemo = ({ onInquire }) => {
   const [department, setDepartment] = useState('cardiology');
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [form, setForm] = useState({ doctor: '', date: '2026-11-26', time: '10:00 AM', name: '', phone: '' });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const doctors = {
     cardiology: [
@@ -27,7 +28,7 @@ const HealthcareDemo = ({ onInquire }) => {
   return (
     <div style={{ fontFamily: 'var(--font-body)', background: '#FFFFFF', color: '#172033' }}>
       {/* Emergency Hotline Header */}
-      <div style={{ background: '#EFF6FF', borderBottom: '1px solid #DBEAFE', padding: '0.6rem 2rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: '#1E40AF', flexWrap: 'wrap' }}>
+      <div className="demo-top-bar" style={{ background: '#EFF6FF', borderBottom: '1px solid #DBEAFE', padding: '0.6rem 2rem', display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', color: '#1E40AF', flexWrap: 'wrap' }}>
         <div>
           <span>🏥 24/7 Acute Medical Emergency Center: <strong>(800) 456-7890</strong></span>
         </div>
@@ -37,22 +38,55 @@ const HealthcareDemo = ({ onInquire }) => {
       </div>
 
       {/* Nav */}
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 2rem', borderBottom: '1px solid #E2E8F0' }}>
+      <header className="demo-navbar-header" style={{ borderBottom: '1px solid #E2E8F0', background: '#FFFFFF' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '1.3rem', fontWeight: 800, color: '#0F172A' }}>
           <div style={{ width: '34px', height: '34px', borderRadius: '8px', background: '#3B82F6', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Activity size={20} />
           </div>
           <span>CARE<span style={{ color: '#3B82F6' }}>PULSE</span> Health</span>
         </div>
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
-          <a href="#departments">Departments</a>
-          <a href="#doctors">Physicians</a>
-          <a href="#booking">Book Appointment</a>
+        <div className="demo-desktop-links" style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
+          <a href="#departments" style={{ color: '#64748B', textDecoration: 'none' }}>Departments</a>
+          <a href="#doctors" style={{ color: '#64748B', textDecoration: 'none' }}>Physicians</a>
+          <a href="#booking" style={{ color: '#64748B', textDecoration: 'none' }}>Book Appointment</a>
         </div>
-        <a href="#booking" style={{ background: '#3B82F6', color: '#FFF', padding: '0.55rem 1.35rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem' }}>
+        <div className="demo-desktop-action">
+          <a href="#booking" style={{ background: '#3B82F6', color: '#FFF', padding: '0.55rem 1.35rem', borderRadius: '6px', fontWeight: 600, fontSize: '0.88rem', textDecoration: 'none' }}>
+            Schedule Visit
+          </a>
+        </div>
+        <button
+          className="demo-hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <a href="#departments" onClick={() => setMobileMenuOpen(false)}>Departments</a>
+        <a href="#doctors" onClick={() => setMobileMenuOpen(false)}>Physicians</a>
+        <a href="#booking" onClick={() => setMobileMenuOpen(false)}>Book Appointment</a>
+        <a
+          href="#booking"
+          onClick={() => setMobileMenuOpen(false)}
+          style={{
+            background: '#3B82F6',
+            color: '#FFF',
+            padding: '0.75rem',
+            borderRadius: '6px',
+            textAlign: 'center',
+            fontWeight: 600,
+            marginTop: '0.5rem',
+            textDecoration: 'none',
+            borderBottom: 'none'
+          }}
+        >
           Schedule Visit
         </a>
-      </header>
+      </div>
 
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg, #F0FDF4 0%, #EFF6FF 100%)', padding: '4rem 2rem', borderBottom: '1px solid #E2E8F0' }}>

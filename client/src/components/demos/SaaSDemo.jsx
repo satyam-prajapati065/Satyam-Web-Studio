@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Sparkles, CheckCircle2, ArrowRight, Zap, Shield, BarChart3,
-  Layers, Users, HelpCircle, ChevronDown, Check, Star
+  Layers, Users, HelpCircle, ChevronDown, Check, Star, Menu, X
 } from 'lucide-react';
 
 const SaaSDemo = ({ onInquire }) => {
@@ -10,6 +10,7 @@ const SaaSDemo = ({ onInquire }) => {
   const [openFaq, setOpenFaq] = useState(null);
   const [emailInput, setEmailInput] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const features = {
     analytics: {
@@ -84,11 +85,7 @@ const SaaSDemo = ({ onInquire }) => {
   return (
     <div style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)', background: '#FFFFFF' }}>
       {/* Demo Nav */}
-      <nav style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '1rem 2rem',
+      <header className="demo-navbar-header" style={{
         borderBottom: '1px solid #E2E8F0',
         background: '#FFFFFF'
       }}>
@@ -98,18 +95,50 @@ const SaaSDemo = ({ onInquire }) => {
           </div>
           <span>Nova<span style={{ color: '#3B82F6' }}>SaaS</span></span>
         </div>
-        <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.9rem', fontWeight: 500, color: '#64748B' }}>
-          <a href="#features" style={{ color: '#1E293B' }}>Features</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
+        <div className="demo-desktop-links" style={{ display: 'flex', gap: '1.5rem', fontSize: '0.9rem', fontWeight: 500, color: '#64748B' }}>
+          <a href="#features" style={{ color: '#1E293B', textDecoration: 'none' }}>Features</a>
+          <a href="#pricing" style={{ color: '#64748B', textDecoration: 'none' }}>Pricing</a>
+          <a href="#faq" style={{ color: '#64748B', textDecoration: 'none' }}>FAQ</a>
+        </div>
+        <div className="demo-desktop-action">
+          <button
+            onClick={onInquire}
+            style={{ background: '#3B82F6', color: '#FFF', padding: '0.5rem 1.25rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem', border: 'none', cursor: 'pointer' }}
+          >
+            Start Free Trial
+          </button>
         </div>
         <button
-          onClick={onInquire}
-          style={{ background: '#3B82F6', color: '#FFF', padding: '0.5rem 1.25rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.9rem' }}
+          className="demo-hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <a href="#features" onClick={() => setMobileMenuOpen(false)}>Features</a>
+        <a href="#pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
+        <a href="#faq" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
+        <button
+          onClick={() => { setMobileMenuOpen(false); onInquire && onInquire(); }}
+          style={{
+            background: '#3B82F6',
+            color: '#FFF',
+            padding: '0.75rem',
+            borderRadius: '8px',
+            fontWeight: 600,
+            fontSize: '0.95rem',
+            border: 'none',
+            cursor: 'pointer',
+            width: '100%'
+          }}
         >
           Start Free Trial
         </button>
-      </nav>
+      </div>
 
       {/* Hero Section */}
       <section style={{ padding: '4.5rem 2rem 3rem 2rem', textAlign: 'center', maxWidth: '850px', margin: '0 auto' }}>

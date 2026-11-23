@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Home, Search, Bed, Bath, Move, MapPin, Phone, Heart, Calendar, Check } from 'lucide-react';
+import { Home, Search, Bed, Bath, Move, MapPin, Phone, Heart, Calendar, Check, Menu, X } from 'lucide-react';
 
 const RealEstateDemo = ({ onInquire }) => {
   const [purpose, setPurpose] = useState('buy'); // 'buy' | 'rent'
   const [typeFilter, setTypeFilter] = useState('All');
   const [tourScheduled, setTourScheduled] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const listings = [
     {
@@ -71,23 +72,55 @@ const RealEstateDemo = ({ onInquire }) => {
   return (
     <div style={{ fontFamily: 'var(--font-body)', background: '#FFFFFF', color: '#172033' }}>
       {/* Header */}
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.25rem 2.5rem', borderBottom: '1px solid #E2E8F0', background: '#FFFFFF' }}>
+      <header className="demo-navbar-header" style={{ borderBottom: '1px solid #E2E8F0', background: '#FFFFFF' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontSize: '1.3rem', fontWeight: 800, color: '#0F172A' }}>
           <Home size={22} color="#3B82F6" />
           <span>APEX<span style={{ color: '#3B82F6' }}>ESTATES</span></span>
         </div>
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
-          <a href="#properties">Properties</a>
-          <a href="#neighborhoods">Neighborhoods</a>
-          <a href="#valuation">Sell With Us</a>
+        <div className="demo-desktop-links" style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600, color: '#64748B' }}>
+          <a href="#properties" style={{ color: '#64748B', textDecoration: 'none' }}>Properties</a>
+          <a href="#neighborhoods" style={{ color: '#64748B', textDecoration: 'none' }}>Neighborhoods</a>
+          <a href="#valuation" style={{ color: '#64748B', textDecoration: 'none' }}>Sell With Us</a>
+        </div>
+        <div className="demo-desktop-action">
+          <button
+            onClick={onInquire}
+            style={{ background: '#0F172A', color: '#FFF', padding: '0.6rem 1.4rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.88rem', border: 'none', cursor: 'pointer' }}
+          >
+            Book Consultation
+          </button>
         </div>
         <button
-          onClick={onInquire}
-          style={{ background: '#0F172A', color: '#FFF', padding: '0.6rem 1.4rem', borderRadius: '8px', fontWeight: 600, fontSize: '0.88rem' }}
+          className="demo-hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <a href="#properties" onClick={() => setMobileMenuOpen(false)}>Properties</a>
+        <a href="#neighborhoods" onClick={() => setMobileMenuOpen(false)}>Neighborhoods</a>
+        <a href="#valuation" onClick={() => setMobileMenuOpen(false)}>Sell With Us</a>
+        <button
+          onClick={() => { setMobileMenuOpen(false); onInquire && onInquire(); }}
+          style={{
+            background: '#0F172A',
+            color: '#FFF',
+            padding: '0.75rem',
+            borderRadius: '8px',
+            fontWeight: 600,
+            fontSize: '0.95rem',
+            border: 'none',
+            cursor: 'pointer',
+            width: '100%'
+          }}
         >
           Book Consultation
         </button>
-      </header>
+      </div>
 
       {/* Hero Search */}
       <div style={{

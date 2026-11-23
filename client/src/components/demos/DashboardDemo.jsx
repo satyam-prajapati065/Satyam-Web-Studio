@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import {
   LayoutDashboard, TrendingUp, Users, DollarSign, ArrowUpRight,
-  ArrowDownRight, MoreVertical, Filter, Download, Bell, Search, CheckCircle2
+  ArrowDownRight, MoreVertical, Filter, Download, Bell, Search, CheckCircle2,
+  Menu, X
 } from 'lucide-react';
 
 const DashboardDemo = () => {
   const [dateRange, setDateRange] = useState('7d');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const orders = [
     { id: 'ORD-8941', customer: 'Acme Corporation', service: 'SaaS Platform Tier', amount: '$1,499.00', status: 'Completed', date: '2026-11-20' },
@@ -21,9 +23,32 @@ const DashboardDemo = () => {
     : orders.filter(o => o.status.toLowerCase() === filterStatus);
 
   return (
-    <div style={{ fontFamily: 'var(--font-body)', background: '#F8FAFC', color: '#172033', minHeight: '100%', display: 'flex' }}>
-      {/* Sidebar Mock */}
-      <aside style={{ width: '220px', background: '#FFFFFF', borderRight: '1px solid #E2E8F0', padding: '1.5rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <div style={{ fontFamily: 'var(--font-body)', background: '#F8FAFC', color: '#172033', minHeight: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Mobile Top Navbar for Dashboard */}
+      <header className="demo-navbar-header demo-mobile-only" style={{ borderBottom: '1px solid #E2E8F0', background: '#FFFFFF' }}>
+        <div style={{ fontWeight: 800, fontSize: '1.15rem', color: '#0F172A' }}>
+          Pulse<span style={{ color: '#3B82F6' }}>Metrics</span>
+        </div>
+        <button
+          className="demo-hamburger-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </header>
+
+      {/* Mobile Drawer */}
+      <div className={`demo-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <a href="#overview" onClick={() => setMobileMenuOpen(false)} style={{ color: '#3B82F6', fontWeight: 700 }}>Overview</a>
+        <a href="#transactions" onClick={() => setMobileMenuOpen(false)}>Transactions</a>
+        <a href="#funnels" onClick={() => setMobileMenuOpen(false)}>Customer Funnels</a>
+        <a href="#settings" onClick={() => setMobileMenuOpen(false)}>Settings</a>
+      </div>
+
+      <div style={{ display: 'flex', flex: 1, width: '100%' }}>
+        {/* Sidebar Mock */}
+        <aside style={{ width: '220px', background: '#FFFFFF', borderRight: '1px solid #E2E8F0', padding: '1.5rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         <div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#0F172A', padding: '0 0.5rem 1rem 0.5rem', borderBottom: '1px solid #F1F5F9' }}>
           Pulse<span style={{ color: '#3B82F6' }}>Metrics</span>
         </div>
@@ -185,6 +210,7 @@ const DashboardDemo = () => {
         </div>
       </main>
     </div>
+  </div>
   );
 };
 
