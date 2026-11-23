@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Utility
 import ScrollToTop from './components/common/ScrollToTop';
+import CustomCursor from './components/common/CustomCursor';
 
 // Layouts
 import MainLayout from './layouts/MainLayout';
@@ -23,6 +24,7 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      <CustomCursor />
       <Routes>
       {/* Standalone Live Demo Viewer (With Responsive Device Frame) */}
       <Route path="/demo/:demoSlug" element={<LiveDemoPage />} />

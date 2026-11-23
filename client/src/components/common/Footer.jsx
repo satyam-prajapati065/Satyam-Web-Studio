@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Code2, Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
+import { Code2, Mail, Phone, MapPin, MessageSquare, Instagram } from 'lucide-react';
 import api from '../../services/api';
 import '../../styles/footer.css';
 
@@ -73,6 +73,9 @@ const Footer = () => {
               </a>
               <a href="https://www.linkedin.com/in/satyam-prajapati-94a25831a/" target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="LinkedIn" title="Satyam Prajapati - LinkedIn Profile">
                 <LinkedinSvg />
+              </a>
+              <a href="https://www.instagram.com/satyam_prajapati065" target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="Instagram" title="Satyam Prajapati - Instagram Profile">
+                <Instagram size={18} />
               </a>
             </div>
           </div>

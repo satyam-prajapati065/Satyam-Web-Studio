@@ -7,20 +7,14 @@ import {
 } from 'lucide-react';
 
 const CategoriesShowcase = ({ categories = [] }) => {
-  // If categories not yet loaded from backend, show curated list
-  const showcaseCategories = categories.length > 0 ? categories.slice(0, 12) : [
+  // Show top 6 featured categories on the home page
+  const showcaseCategories = categories.length > 0 ? categories.slice(0, 6) : [
     { name: 'SaaS & Startup', slug: 'saas-startup', description: 'High-conversion software landing pages & product showcases.', templateCount: 3 },
-    { name: 'Fashion & E-Commerce', slug: 'fashion-store', description: 'Modern storefronts with shopping cart & catalog filters.', templateCount: 4 },
-    { name: 'Restaurant & Dining', slug: 'restaurant', description: 'Culinary menus, table reservations & chef highlights.', templateCount: 2 },
+    { name: 'E-commerce & Store', slug: 'e-commerce', description: 'Modern digital storefronts with shopping cart & catalog filters.', templateCount: 3 },
+    { name: 'Restaurant & Dining', slug: 'restaurant', description: 'Culinary menus, table reservations & chef highlights.', templateCount: 3 },
     { name: 'Luxury Real Estate', slug: 'real-estate', description: 'Property listings, buy/rent filters & tour scheduling.', templateCount: 3 },
-    { name: 'Hospital & Healthcare', slug: 'hospital-healthcare', description: 'Clinical departments, doctor profiles & appointment booking.', templateCount: 2 },
-    { name: 'Business & Corporate', slug: 'business-corporate', description: 'Enterprise consulting, partner matrices & strategic solutions.', templateCount: 3 },
-    { name: 'Dashboard & Admin Panels', slug: 'dashboard-admin-panel', description: 'Data analytics, KPI metrics & administrative interfaces.', templateCount: 2 },
-    { name: 'Gym & Athletic Clubs', slug: 'gym-fitness', description: 'Class timetables, membership plans & trainer showcases.', templateCount: 2 },
-    { name: 'Education & LMS', slug: 'education-lms', description: 'Online course catalogs, syllabus modules & student dashboards.', templateCount: 2 },
-    { name: 'Boutique Hotels & Resorts', slug: 'hotel-resort', description: 'Room availability, amenity tours & reservation funnels.', templateCount: 2 },
-    { name: 'Creative Personal Portfolio', slug: 'personal-portfolio', description: 'Developer portfolios, project showcases & resume integration.', templateCount: 2 },
-    { name: 'High-Converting Landing Pages', slug: 'landing-pages', description: 'Single-page product launches & targeted lead magnets.', templateCount: 3 }
+    { name: 'Hospital & Healthcare', slug: 'hospital-healthcare', description: 'Clinical departments, doctor profiles & appointment booking.', templateCount: 3 },
+    { name: 'Business & Corporate', slug: 'business-corporate', description: 'Enterprise consulting, partner matrices & strategic solutions.', templateCount: 3 }
   ];
 
   return (
@@ -33,15 +27,15 @@ const CategoriesShowcase = ({ categories = [] }) => {
             <span>Versatile Web Development</span>
           </div>
           <h2 className="section-title">
-            Explore 30+ Website Categories I Build
+            Explore 35+ Website Categories I Build
           </h2>
           <p className="section-desc">
             Whatever your industry, I engineer tailored digital platforms featuring custom design, seamless responsiveness, and high conversion rates.
           </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid-3" style={{ marginBottom: '2.5rem' }}>
+        {/* Categories Grid (Top 6 Featured Categories) */}
+        <div className="grid-3" style={{ marginBottom: '3rem' }}>
           {showcaseCategories.map((cat) => (
             <Link
               key={cat.slug}
@@ -52,13 +46,14 @@ const CategoriesShowcase = ({ categories = [] }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                borderLeft: '3px solid var(--accent-primary)'
+                borderLeft: '3px solid var(--accent-primary)',
+                transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
               }}
             >
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
                   <span className="badge badge-blue">
-                    {cat.templateCount ? `${cat.templateCount} Templates` : 'Available'}
+                    {cat.templateCount ? `${cat.templateCount} Templates` : '3 Templates'}
                   </span>
                   <ArrowRight size={16} color="var(--accent-primary)" />
                 </div>
@@ -66,7 +61,7 @@ const CategoriesShowcase = ({ categories = [] }) => {
                   {cat.name}
                 </h3>
                 <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                  {cat.description}
+                  {cat.description || 'Production-ready responsive layouts tailored for your business.'}
                 </p>
               </div>
 
@@ -78,9 +73,21 @@ const CategoriesShowcase = ({ categories = [] }) => {
           ))}
         </div>
 
-        {/* Bottom CTA to view all 35 categories */}
+        {/* Bottom CTA to browse all 35 categories */}
         <div style={{ textAlign: 'center' }}>
-          <Link to="/templates" className="btn btn-outline btn-lg">
+          <Link
+            to="/templates"
+            className="btn btn-primary btn-lg"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              padding: '0.9rem 2.2rem',
+              fontSize: '1rem',
+              fontWeight: 700,
+              boxShadow: '0 4px 14px rgba(59, 130, 246, 0.25)'
+            }}
+          >
             <span>Browse All 35 Website Categories</span>
             <ArrowRight size={18} />
           </Link>
