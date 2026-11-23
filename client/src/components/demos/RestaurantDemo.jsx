@@ -255,6 +255,163 @@ const RestaurantDemo = ({ onInquire }) => {
           )}
         </div>
       </section>
+
+      {/* Our Story & Executive Chef Marco Rossi */}
+      <section id="story" style={{ padding: '5rem 2rem', maxWidth: '1050px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+          <div>
+            <span style={{ textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '0.15em', color: '#D97706', fontWeight: 700 }}>
+              HERITAGE & CRAFTSMANSHIP
+            </span>
+            <h2 style={{ fontSize: '2.4rem', fontWeight: 800, color: '#2B1E12', marginTop: '0.4rem', marginBottom: '1.25rem', lineHeight: 1.2 }}>
+              Three Generations of Tuscan Culinary Passion
+            </h2>
+            <p style={{ color: '#6B5844', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+              Founded in Florence in 1958 by Nonna Caterina, Bella Cucina honors centuries of rustic Italian home cooking while blending contemporary culinary techniques. Every morning, our pasta makers roll semolina flour with farm-fresh golden yolk eggs.
+            </p>
+            <p style={{ color: '#6B5844', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1.75rem' }}>
+              "Food is not merely fuel; it is our sacred language of warmth, family, and shared human joy." — Executive Chef Marco Rossi.
+            </p>
+            <div style={{ display: 'flex', gap: '2rem' }}>
+              <div>
+                <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#2B1E12' }}>65+</div>
+                <div style={{ fontSize: '0.85rem', color: '#786858' }}>Years of Tradition</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#2B1E12' }}>3</div>
+                <div style={{ fontSize: '0.85rem', color: '#786858' }}>Michelin Mentions</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '1.85rem', fontWeight: 800, color: '#2B1E12' }}>100%</div>
+                <div style={{ fontSize: '0.85rem', color: '#786858' }}>Organic Tuscan Olive Oil</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img
+              src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80"
+              alt="Executive Chef Marco Rossi"
+              style={{ width: '100%', borderRadius: '14px', objectFit: 'cover', maxHeight: '420px', boxShadow: '0 12px 30px rgba(43, 30, 18, 0.15)' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Wine Cellar & Sommelier Curations */}
+      <section style={{ background: '#2B1E12', color: '#F1E9DF', padding: '5rem 2rem' }}>
+        <div style={{ maxWidth: '1050px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <span style={{ textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '0.15em', color: '#D97706', fontWeight: 700 }}>
+              PRIVATE CELLAR
+            </span>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#FFF', marginTop: '0.4rem' }}>
+              Over 400 Curated Old-World Vintages
+            </h2>
+            <p style={{ color: '#D5C7B7', maxWidth: '600px', margin: '0.5rem auto 0 auto', fontSize: '0.95rem' }}>
+              Our Head Sommelier curates rare biodynamic varietals directly from small family vineyards across Tuscany, Piedmont, and Veneto.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.75rem' }}>
+            {[
+              { vintage: '2016', name: 'Brunello di Montalcino Riserva', region: 'Tuscany, Italy', notes: 'Ripe black cherry, tobacco leaf, silky tannins.', glass: '$28' },
+              { vintage: '2018', name: 'Barolo DOCG Cannubi', region: 'Piedmont, Italy', notes: 'Dried rose petals, wild truffles, tar, mineral elegance.', glass: '$32' },
+              { vintage: '2019', name: 'Chianti Classico Gran Selezione', region: 'Tuscany, Italy', notes: 'Sangiovese purity, dried herbs, bright violet acidity.', glass: '$22' },
+              { vintage: '2020', name: 'Franciacorta Extra Brut Vintage', region: 'Lombardy, Italy', notes: 'Crisp golden brioche, green apple, ultra-fine bubbles.', glass: '$25' }
+            ].map((wine, i) => (
+              <div key={i} style={{ background: '#3D2D1E', border: '1px solid #57412E', borderRadius: '12px', padding: '1.75rem' }}>
+                <span style={{ background: '#D97706', color: '#FFF', fontSize: '0.72rem', fontWeight: 700, padding: '0.2rem 0.6rem', borderRadius: '4px' }}>
+                  {wine.vintage}
+                </span>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#FFF', marginTop: '0.75rem', marginBottom: '0.25rem' }}>{wine.name}</h3>
+                <div style={{ fontSize: '0.82rem', color: '#D97706', fontWeight: 600, marginBottom: '0.6rem' }}>{wine.region}</div>
+                <p style={{ color: '#C4B5A5', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '1rem' }}>{wine.notes}</p>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#FFF' }}>{wine.glass} <span style={{ fontSize: '0.8rem', color: '#A8998A' }}>/ glass</span></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Guest Reviews & Critic Acclaim */}
+      <section style={{ padding: '5rem 2rem', maxWidth: '1050px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#2B1E12' }}>Critic Acclaim & Guest Reflections</h2>
+          <p style={{ color: '#786858', marginTop: '0.4rem' }}>Honored to share our passion with food lovers from across the world.</p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+          {[
+            { quote: 'The black truffle tagliolini is nothing short of sublime. One of the finest dining experiences in Florence.', critic: 'Michelin Guide Inspector', source: '2025 Edition' },
+            { quote: 'An authentic masterclass in Tuscan hospitality. The warmth of the staff equals the brilliance of the plates.', critic: 'Gourmet Traveller', source: 'Top 50 European Bistros' },
+            { quote: 'A culinary revelation. From the burrata to the tiramisu, every mouthful transported our family to Italy.', critic: 'Countess Beatrice d’Este', source: 'Verified Patron' }
+          ].map((rev, i) => (
+            <div key={i} style={{ background: '#FFFDF9', border: '1px solid #F1E9DF', borderRadius: '12px', padding: '2rem' }}>
+              <div style={{ display: 'flex', gap: '0.25rem', color: '#D97706', marginBottom: '1rem' }}>
+                {[...Array(5)].map((_, idx) => <Star key={idx} size={16} fill="#D97706" />)}
+              </div>
+              <p style={{ color: '#4B3F32', fontSize: '0.95rem', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '1.25rem' }}>
+                "{rev.quote}"
+              </p>
+              <div style={{ borderTop: '1px solid #E5D8CA', paddingTop: '0.75rem' }}>
+                <div style={{ fontWeight: 700, color: '#2B1E12' }}>{rev.critic}</div>
+                <div style={{ fontSize: '0.8rem', color: '#786858' }}>{rev.source}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Restaurant Hours & Location Banner */}
+      <section style={{ background: '#F9F5EF', borderTop: '1px solid #EADCCB', padding: '4rem 2rem' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', textAlign: 'center' }}>
+          <div>
+            <div style={{ fontWeight: 800, color: '#2B1E12', fontSize: '1.1rem', marginBottom: '0.5rem' }}>📍 Location</div>
+            <p style={{ color: '#6B5844', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              45 Via Roma, Historic Center<br />
+              Florence, Italy 50123<br />
+              Complimentary Valet Parking
+            </p>
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, color: '#2B1E12', fontSize: '1.1rem', marginBottom: '0.5rem' }}>⏰ Service Hours</div>
+            <p style={{ color: '#6B5844', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              Lunch: 12:00 PM – 3:00 PM<br />
+              Dinner: 5:00 PM – 11:30 PM<br />
+              Open All 7 Days
+            </p>
+          </div>
+          <div>
+            <div style={{ fontWeight: 800, color: '#2B1E12', fontSize: '1.1rem', marginBottom: '0.5rem' }}>📞 Private Inquiries</div>
+            <p style={{ color: '#6B5844', fontSize: '0.9rem', lineHeight: 1.5 }}>
+              Reservations: +39 055 234 5678<br />
+              Events: events@bellacucina.it<br />
+              WhatsApp: +91 9554079669
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Restaurant Footer */}
+      <footer style={{ background: '#1A120A', color: '#C4B5A5', padding: '3.5rem 2rem 2rem 2rem', textAlign: 'center', fontSize: '0.85rem' }}>
+        <div style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '0.08em', color: '#FFF', marginBottom: '0.75rem' }}>
+          BELLA<span style={{ color: '#D97706' }}>CUCINA</span>
+        </div>
+        <p style={{ maxWidth: '500px', margin: '0 auto 1.5rem auto', color: '#9E8D7C' }}>
+          Artisanal Tuscan Gastronomy Reimagined. Built with clean modular React.js architecture by Satyam Web Studio.
+        </p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
+          <a href="#menu" style={{ color: '#C4B5A5', textDecoration: 'none' }}>Chef's Menu</a>
+          <a href="#story" style={{ color: '#C4B5A5', textDecoration: 'none' }}>Heritage</a>
+          <a href="#reserve" style={{ color: '#C4B5A5', textDecoration: 'none' }}>Book Table</a>
+          <button onClick={onInquire} style={{ background: 'transparent', border: 'none', color: '#D97706', fontWeight: 700, cursor: 'pointer' }}>
+            Request Similar Website
+          </button>
+        </div>
+        <div style={{ color: '#786858', fontSize: '0.78rem' }}>
+          © {new Date().getFullYear()} Bella Cucina Ristorante. All rights reserved.
+        </div>
+      </footer>
     </div>
   );
 };

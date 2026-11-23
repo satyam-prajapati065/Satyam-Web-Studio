@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/common/SEO';
 import { ExternalLink, Github, Sparkles, CheckCircle2, MessageSquare } from 'lucide-react';
 import api from '../services/api';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
@@ -49,7 +50,15 @@ const ProjectsPage = () => {
       </section>
 
       <div className="container" style={{ marginTop: '3.5rem' }}>
-        <div className="grid-3">
+        {loading ? (
+          <LoadingSpinner
+            title="Loading Portfolio Projects..."
+            subtitle="Fetching completed client websites, case studies, and engineering details..."
+            size="lg"
+            minHeight="400px"
+          />
+        ) : (
+          <div className="grid-3">
           {projects.map((proj) => (
             <div
               key={proj._id}
@@ -104,6 +113,7 @@ const ProjectsPage = () => {
             </div>
           ))}
         </div>
+        )}
       </div>
     </div>
   );

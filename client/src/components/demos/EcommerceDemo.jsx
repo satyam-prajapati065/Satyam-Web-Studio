@@ -348,6 +348,129 @@ const EcommerceDemo = ({ onInquire }) => {
         </div>
       </div>
 
+      {/* Sustainable Crafting Standards */}
+      <section style={{ background: '#F8FAFC', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0', padding: '5rem 2rem' }}>
+        <div style={{ maxWidth: '1050px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+          <div>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              CONSCIOUS LUXURY
+            </span>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#0F172A', marginTop: '0.4rem', marginBottom: '1.25rem', lineHeight: 1.2 }}>
+              Ethical Sourcing & Zero-Waste Italian Craftsmanship
+            </h2>
+            <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+              We partner directly with family-owned heritage mills across Florence and Biella. Every garment is crafted in limited batches from GOTS-certified organic linen, Grade-A Mongolian cashmere, and vegetable-tanned leather.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
+              <div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A' }}>100%</div>
+                <div style={{ fontSize: '0.82rem', color: '#64748B' }}>Traceable Supply Chain</div>
+              </div>
+              <div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0F172A' }}>Zero</div>
+                <div style={{ fontSize: '0.82rem', color: '#64748B' }}>Microplastic Synthetics</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img
+              src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+              alt="Craftsmanship"
+              style={{ width: '100%', borderRadius: '16px', maxHeight: '380px', objectFit: 'cover', boxShadow: '0 10px 25px rgba(0,0,0,0.08)' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Reviews & Social Proof */}
+      <section style={{ padding: '5rem 2rem', maxWidth: '1050px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#0F172A' }}>Loved by Discerning Shoppers Worldwide</h2>
+          <p style={{ color: '#64748B', marginTop: '0.4rem' }}>Over 4,800+ five-star verified purchases across 42 countries.</p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+          {[
+            { name: 'Sienna Miller', role: 'Verified Buyer, London', review: 'The structured trench coat is museum-grade perfection. The drape, horn buttons, and tailored silhouette feel like a $1,200 piece.' },
+            { name: 'Chloe Dubois', role: 'Verified Buyer, Paris', review: 'Cashmere cardigan feels like clouds. Arrived in recyclable linen packaging with personal note. Exemplary customer service.' },
+            { name: 'Marcus Vance', role: 'Verified Buyer, New York', review: 'Tuscan leather tote bag has aged beautifully over 6 months of daily commute. Sturdy brass zippers and timeless elegance.' }
+          ].map((rev, i) => (
+            <div key={i} style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', padding: '1.75rem', boxShadow: '0 2px 8px rgba(0,0,0,0.03)' }}>
+              <div style={{ color: '#F59E0B', marginBottom: '0.75rem' }}>★★★★★</div>
+              <p style={{ color: '#334155', fontSize: '0.9rem', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '1.25rem' }}>
+                "{rev.review}"
+              </p>
+              <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '0.75rem' }}>
+                <div style={{ fontWeight: 700, color: '#0F172A', fontSize: '0.92rem' }}>{rev.name}</div>
+                <div style={{ fontSize: '0.78rem', color: '#3B82F6', fontWeight: 600 }}>{rev.role}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* VIP Loyalty Perks Strip */}
+      <section style={{ background: '#0F172A', color: '#FFFFFF', padding: '3.5rem 2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+          <div>
+            <div style={{ fontSize: '1.75rem', marginBottom: '0.4rem' }}>✈️</div>
+            <div style={{ fontWeight: 700, fontSize: '1rem', color: '#FFF' }}>Complimentary Global Express</div>
+            <div style={{ fontSize: '0.82rem', color: '#94A3B8', marginTop: '0.2rem' }}>Free express on all orders over $150</div>
+          </div>
+          <div>
+            <div style={{ fontSize: '1.75rem', marginBottom: '0.4rem' }}>🔄</div>
+            <div style={{ fontWeight: 700, fontSize: '1rem', color: '#FFF' }}>30-Day Hassle-Free Returns</div>
+            <div style={{ fontSize: '0.82rem', color: '#94A3B8', marginTop: '0.2rem' }}>Prepaid doorstep courier return labels</div>
+          </div>
+          <div>
+            <div style={{ fontSize: '1.75rem', marginBottom: '0.4rem' }}>🔒</div>
+            <div style={{ fontWeight: 700, fontSize: '1rem', color: '#FFF' }}>Encrypted Checkout</div>
+            <div style={{ fontSize: '0.82rem', color: '#94A3B8', marginTop: '0.2rem' }}>Stripe & Razorpay 256-bit SSL security</div>
+          </div>
+        </div>
+      </section>
+
+      {/* E-Commerce Footer */}
+      <footer style={{ background: '#070B14', color: '#94A3B8', padding: '4rem 2rem 2rem 2rem', borderTop: '1px solid #1E293B' }}>
+        <div style={{ maxWidth: '1050px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
+          <div>
+            <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#FFF', letterSpacing: '0.05em', marginBottom: '0.75rem' }}>
+              AURA<span style={{ color: '#3B82F6' }}>STUDIO</span>
+            </div>
+            <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: '#94A3B8' }}>
+              Modern high-conversion luxury retail storefront engineered with clean modular React.js architecture by Satyam Web Studio.
+            </p>
+          </div>
+          <div>
+            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFF', marginBottom: '0.75rem' }}>Collections</div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem' }}>
+              <li>Outerwear & Trench Coats</li>
+              <li>Grade-A Mongolian Cashmere</li>
+              <li>Italian Vegetable-Tanned Bags</li>
+              <li>Tailored French Linen Trousers</li>
+              <li>Goodyear Welted Footwear</li>
+            </ul>
+          </div>
+          <div>
+            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFF', marginBottom: '0.75rem' }}>Get A Store Like This</div>
+            <p style={{ fontSize: '0.85rem', color: '#94A3B8', marginBottom: '0.75rem' }}>
+              Need an e-commerce website with cart, inventory, and payment gateway built for your brand?
+            </p>
+            <button
+              onClick={onInquire}
+              style={{ background: '#3B82F6', color: '#FFF', padding: '0.65rem 1.25rem', borderRadius: '6px', fontWeight: 800, fontSize: '0.85rem', border: 'none', cursor: 'pointer' }}
+            >
+              Request E-commerce Store
+            </button>
+          </div>
+        </div>
+
+        <div style={{ maxWidth: '1050px', margin: '0 auto', paddingTop: '1.5rem', borderTop: '1px solid #1E293B', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <div>© {new Date().getFullYear()} AuraStudio Inc. All rights reserved.</div>
+          <div>Engineered with pure React & Vite by Satyam Web Studio</div>
+        </div>
+      </footer>
+
       {/* Slideout Cart Drawer */}
       {isCartOpen && (
         <div style={{

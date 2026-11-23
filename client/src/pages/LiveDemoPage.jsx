@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import SEO from '../components/common/SEO';
 import Navbar from '../components/common/Navbar';
 import DeviceFrame from '../components/common/DeviceFrame';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 import api from '../services/api';
 
 // Genuine interactive category demo components
@@ -82,8 +83,12 @@ const LiveDemoPage = () => {
 
   if (loading) {
     return (
-      <div style={{ textAlign: 'center', padding: '10rem 0', color: 'var(--text-muted)' }}>
-        <h2>Loading Live Preview Environment...</h2>
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
+        <LoadingSpinner
+          title="Loading Live Interactive Demo..."
+          subtitle="Initializing responsive device viewports, interactive states, and theme preview..."
+          size="lg"
+        />
       </div>
     );
   }

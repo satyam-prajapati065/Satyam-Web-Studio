@@ -466,6 +466,213 @@ const SaaSDemo = ({ onInquire }) => {
           </div>
         </div>
       </section>
+
+      {/* Enterprise Security & Compliance Grid */}
+      <section style={{ padding: '4.5rem 2rem', background: '#FFFFFF', borderTop: '1px solid #E2E8F0' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 3rem auto' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Bank-Grade Security</span>
+            <h2 style={{ fontSize: '2.1rem', fontWeight: 800, color: '#0F172A', marginTop: '0.4rem' }}>Engineered for Stringent Enterprise Compliance</h2>
+            <p style={{ color: '#64748B', fontSize: '0.95rem', marginTop: '0.5rem' }}>NovaSaaS adheres to top-tier financial, healthcare, and global data privacy standards from day one.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+            {[
+              {
+                title: 'SOC2 Type II Certified',
+                desc: 'Audited annually by independent AICPA examiners with zero major non-conformities.',
+                tag: 'Audited 2026'
+              },
+              {
+                title: 'HIPAA & GDPR Compliant',
+                desc: 'End-to-end PII tokenization, signed BAAs for healthcare clients, and automated EU data sovereignty.',
+                tag: 'Global Privacy'
+              },
+              {
+                title: '99.995% Uptime SLA',
+                desc: 'Multi-region failover across 3 AWS availability zones with sub-second health-check re-routing.',
+                tag: 'High Availability'
+              },
+              {
+                title: 'Granular RBAC & SAML SSO',
+                desc: 'Seamless Okta, Azure AD, and Google Workspace identity integrations with role-based policies.',
+                tag: 'Zero-Trust Access'
+              }
+            ].map((badge, i) => (
+              <div key={i} style={{ background: '#F8FAFC', padding: '1.75rem', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
+                <span style={{ fontSize: '0.72rem', fontWeight: 700, background: '#EFF6FF', color: '#1D4ED8', padding: '0.2rem 0.6rem', borderRadius: '4px' }}>
+                  {badge.tag}
+                </span>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0F172A', marginTop: '0.85rem', marginBottom: '0.4rem' }}>{badge.title}</h4>
+                <p style={{ fontSize: '0.88rem', color: '#64748B', lineHeight: 1.5, margin: 0 }}>{badge.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Wall of Love */}
+      <section style={{ padding: '4.5rem 2rem', background: '#F8FAFC', borderTop: '1px solid #E2E8F0' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Customer Wall of Love</span>
+            <h2 style={{ fontSize: '2.1rem', fontWeight: 800, color: '#0F172A', marginTop: '0.4rem' }}>Loved by 12,000+ Modern Tech Teams</h2>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+            {[
+              {
+                quote: 'NovaSaaS replaced 4 disjointed analytics and observability tools. Our sprint velocity doubled and we caught 3 critical payment bottlenecks before customers noticed.',
+                author: 'Elena Rostova',
+                role: 'VP of Engineering at PayStream ($400M ARR)',
+                stars: 5
+              },
+              {
+                quote: 'The automated event pipelines and webhook replay guarantees gave us immediate peace of mind. Zero dropped customer events during our Black Friday surge of 18M requests.',
+                author: 'Marcus Chen',
+                role: 'Chief Technology Officer at OrbitCloud',
+                stars: 5
+              },
+              {
+                quote: 'Setup took literally 4 minutes with their React SDK. We upgraded to the Enterprise tier within our first month because of their dedicated Slack architect support.',
+                author: 'Sarah Jenkins',
+                role: 'Head of Growth at StackFlow Labs',
+                stars: 5
+              }
+            ].map((review, i) => (
+              <div key={i} style={{ background: '#FFFFFF', padding: '2rem', borderRadius: '14px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.03)' }}>
+                <div>
+                  <div style={{ display: 'flex', gap: '0.2rem', marginBottom: '1rem' }}>
+                    {[...Array(review.stars)].map((_, s) => (
+                      <Star key={s} size={16} fill="#F59E0B" color="#F59E0B" />
+                    ))}
+                  </div>
+                  <p style={{ color: '#334155', fontSize: '0.94rem', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '1.5rem' }}>
+                    "{review.quote}"
+                  </p>
+                </div>
+                <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '1rem' }}>
+                  <div style={{ fontWeight: 700, color: '#0F172A', fontSize: '0.95rem' }}>{review.author}</div>
+                  <div style={{ fontSize: '0.82rem', color: '#64748B' }}>{review.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* High-Conversion Bottom CTA Banner */}
+      <section style={{ padding: '5rem 2rem', background: '#0F172A', color: '#FFFFFF', textAlign: 'center' }}>
+        <div style={{ maxWidth: '750px', margin: '0 auto' }}>
+          <span style={{ fontSize: '0.85rem', fontWeight: 700, background: 'rgba(59, 130, 246, 0.2)', color: '#60A5FA', padding: '0.3rem 0.9rem', borderRadius: '999px', display: 'inline-block', marginBottom: '1.25rem' }}>
+            🚀 Instant 14-Day Free Sandbox Access
+          </span>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.2, marginBottom: '1rem' }}>
+            Ready to Accelerate Your Product Telemetry?
+          </h2>
+          <p style={{ color: '#94A3B8', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '2.5rem' }}>
+            Join 12,000+ data-driven companies deploying real-time event attribution and automated event loops in under 5 minutes.
+          </p>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <button
+              onClick={onInquire}
+              style={{
+                background: '#3B82F6',
+                color: '#FFF',
+                border: 'none',
+                padding: '0.95rem 2rem',
+                borderRadius: '8px',
+                fontWeight: 700,
+                fontSize: '1rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                boxShadow: '0 4px 14px rgba(59, 130, 246, 0.4)'
+              }}
+            >
+              Start Free Trial Now <ArrowRight size={18} />
+            </button>
+            <button
+              onClick={onInquire}
+              style={{
+                background: 'transparent',
+                color: '#FFFFFF',
+                border: '1px solid rgba(255,255,255,0.2)',
+                padding: '0.95rem 1.75rem',
+                borderRadius: '8px',
+                fontWeight: 600,
+                fontSize: '1rem',
+                cursor: 'pointer'
+              }}
+            >
+              Book Architect Demo
+            </button>
+          </div>
+          <div style={{ marginTop: '1.5rem', color: '#64748B', fontSize: '0.85rem', display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+            <span>✓ No credit card required</span>
+            <span>✓ Full Growth Pro features</span>
+            <span>✓ Cancel anytime</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Comprehensive NovaSaaS Footer */}
+      <footer style={{ background: '#0B1120', color: '#94A3B8', padding: '4rem 2rem 2rem 2rem', borderTop: '1px solid #1E293B' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontWeight: 800, fontSize: '1.25rem', color: '#FFF', marginBottom: '1rem' }}>
+              <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#3B82F6', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Zap size={16} />
+              </div>
+              <span>Nova<span style={{ color: '#3B82F6' }}>SaaS</span></span>
+            </div>
+            <p style={{ fontSize: '0.88rem', lineHeight: 1.6, color: '#64748B' }}>
+              The unified customer telemetry and event automation engine for high-velocity software engineering and growth teams.
+            </p>
+          </div>
+
+          <div>
+            <h4 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '0.95rem', marginBottom: '1rem' }}>Platform</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.88rem' }}>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>Sub-second Telemetry</span>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>Autonomous Webhooks</span>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>Cohort Retention Maps</span>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>Snowflake Direct Sync</span>
+            </div>
+          </div>
+
+          <div>
+            <h4 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '0.95rem', marginBottom: '1rem' }}>Developers</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.88rem' }}>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>SDK Documentation</span>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>REST & GraphQL APIs</span>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>Webhook Replay Engine</span>
+              <span style={{ cursor: 'pointer', color: '#94A3B8' }}>Status & Reliability</span>
+            </div>
+          </div>
+
+          <div>
+            <h4 style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '0.95rem', marginBottom: '1rem' }}>Enterprise</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.88rem', color: '#94A3B8' }}>
+              <span>Security & Trust Center</span>
+              <span>SOC2 Type II Report</span>
+              <span>Dedicated Solutions Architect</span>
+              <span style={{ color: '#10B981', fontWeight: 600 }}>All Systems 100% Operational</span>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ maxWidth: '1200px', margin: '0 auto', paddingTop: '2rem', borderTop: '1px solid #1E293B', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', fontSize: '0.8rem', color: '#64748B' }}>
+          <div>© {new Date().getFullYear()} NovaSaaS Technologies Inc. All rights reserved.</div>
+          <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <span>Privacy Policy</span>
+            <span>Terms of Service</span>
+            <span>Security Documentation</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

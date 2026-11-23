@@ -216,6 +216,122 @@ const HealthcareDemo = ({ onInquire }) => {
           )}
         </div>
       </section>
+
+      {/* Facilities & Diagnostic Capabilities */}
+      <section style={{ padding: '5rem 2rem', maxWidth: '1050px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <span style={{ background: '#DBEAFE', color: '#1D4ED8', padding: '0.3rem 0.85rem', borderRadius: '999px', fontSize: '0.78rem', fontWeight: 700 }}>
+            HOSPITAL INFRASTRUCTURE
+          </span>
+          <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#0F172A', marginTop: '0.5rem' }}>
+            Advanced Facilities Engineered For Life-Saving Precision
+          </h2>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.75rem' }}>
+          {[
+            { icon: '🏥', title: 'Level-1 Emergency Trauma Center', desc: 'Staffed 24/7 with dedicated trauma surgeons, triage nurses, and dedicated CT scanners.' },
+            { icon: '🔬', title: 'Next-Gen 3T MRI & PET-CT Imaging', desc: 'Ultra-high-definition imaging minimizing radiation exposure while pinpointing micro-lesions.' },
+            { icon: '🤖', title: 'Robotic-Assisted Surgical Suites', desc: 'Minimally invasive laparoscopic and robotic systems ensuring faster recovery times.' },
+            { icon: '💊', title: 'Automated 24/7 Smart Pharmacy', desc: 'Zero-error robotic prescription dispensing with doorstep delivery for chronic conditions.' }
+          ].map((f, i) => (
+            <div key={i} style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '1.75rem', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
+              <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{f.icon}</div>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0F172A', marginBottom: '0.4rem' }}>{f.title}</h3>
+              <p style={{ color: '#64748B', fontSize: '0.88rem', lineHeight: 1.6 }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Patient Recovery Stories */}
+      <section style={{ background: '#F8FAFC', padding: '5rem 2rem', borderTop: '1px solid #E2E8F0', borderBottom: '1px solid #E2E8F0' }}>
+        <div style={{ maxWidth: '1050px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#0F172A' }}>Patient Testimonials & Recovery Stories</h2>
+            <p style={{ color: '#64748B', marginTop: '0.4rem' }}>Real journeys from patients whose lives were restored by our team.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+            {[
+              { patient: 'Arthur Pendelton, 62', condition: 'Triple Bypass Cardiac Surgery', story: 'Dr. Sarah Jenkins and her cardiac team gave me a second chance at life. The compassionate post-op care was unmatched.' },
+              { patient: 'Maya Lin, 34', condition: 'Smile Restoration & Orthodontics', story: 'From the initial digital scan to my final veneers, Dr. Emily Vance treated me like family. I finally smile with absolute confidence.' },
+              { patient: 'David Kowalski, 48', condition: 'Advanced Spinal Neurological Therapy', story: 'After months of chronic numbness, Dr. Alpert accurate diagnosis helped me avoid invasive surgery and walk pain-free again.' }
+            ].map((st, i) => (
+              <div key={i} style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '14px', padding: '2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                <div style={{ color: '#F59E0B', marginBottom: '0.75rem' }}>⭐⭐⭐⭐⭐</div>
+                <p style={{ color: '#334155', fontSize: '0.92rem', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '1.25rem' }}>
+                  "{st.story}"
+                </p>
+                <div style={{ borderTop: '1px solid #F1F5F9', paddingTop: '0.85rem' }}>
+                  <div style={{ fontWeight: 700, color: '#0F172A', fontSize: '0.95rem' }}>{st.patient}</div>
+                  <div style={{ fontSize: '0.8rem', color: '#3B82F6', fontWeight: 600 }}>{st.condition}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Insurance & Cashless Partners */}
+      <section style={{ padding: '3.5rem 2rem', background: '#FFFFFF', textAlign: 'center' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            ACCEPTED HEALTHCARE INSURANCE & CASHLESS PARTNERS
+          </span>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem', flexWrap: 'wrap', alignItems: 'center', marginTop: '1.5rem', opacity: 0.8 }}>
+            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#1E3A8A' }}>BlueCross BlueShield</span>
+            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#065F46' }}>Aetna Health</span>
+            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#B45309' }}>Cigna Global</span>
+            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#1E40AF' }}>UnitedHealthcare</span>
+            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#7C3AED' }}>Star Health & Allied</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Healthcare Clinic Footer */}
+      <footer style={{ background: '#0F172A', color: '#94A3B8', padding: '4rem 2rem 2rem 2rem', borderTop: '1px solid #1E293B' }}>
+        <div style={{ maxWidth: '1050px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
+          <div>
+            <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#FFFFFF', marginBottom: '0.75rem' }}>
+              CARE<span style={{ color: '#3B82F6' }}>PULSE</span> Health
+            </div>
+            <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: '#94A3B8' }}>
+              World-class clinical specialties, compassionate patient-first care, and transparent healthcare technology developed by Satyam Web Studio.
+            </p>
+          </div>
+          <div>
+            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFFFFF', marginBottom: '0.75rem' }}>Specialty Centers</div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem' }}>
+              <li>Interventional Cardiology</li>
+              <li>Cosmetic & Restorative Dentistry</li>
+              <li>Clinical Neurology & Stroke Unit</li>
+              <li>Robotic General Surgery</li>
+              <li>Pediatric Critical Care</li>
+            </ul>
+          </div>
+          <div>
+            <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFFFFF', marginBottom: '0.75rem' }}>Emergency Care</div>
+            <p style={{ fontSize: '0.85rem', color: '#94A3B8', marginBottom: '0.5rem' }}>
+              24/7 Trauma Hotline: <strong>(800) 456-7890</strong>
+            </p>
+            <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>
+              WhatsApp Emergency Desk: <strong>+91 9554079669</strong>
+            </p>
+            <button
+              onClick={onInquire}
+              style={{ background: '#3B82F6', color: '#FFF', padding: '0.55rem 1.25rem', borderRadius: '6px', fontWeight: 700, fontSize: '0.85rem', border: 'none', cursor: 'pointer', marginTop: '0.75rem' }}
+            >
+              Request Similar Hospital Website
+            </button>
+          </div>
+        </div>
+
+        <div style={{ maxWidth: '1050px', margin: '0 auto', paddingTop: '1.5rem', borderTop: '1px solid #1E293B', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <div>© {new Date().getFullYear()} CarePulse Healthcare Network. HIPAA & NABH Compliant Portal.</div>
+          <div>Engineered with pure React & Vite by Satyam Web Studio</div>
+        </div>
+      </footer>
     </div>
   );
 };

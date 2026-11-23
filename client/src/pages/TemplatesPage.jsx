@@ -4,9 +4,11 @@ import SEO from '../components/common/SEO';
 import {
   Search, Filter, Eye, Sparkles, Layers,
   ChevronDown, ChevronUp, ChevronLeft, ChevronRight,
-  ArrowUpDown, X, Check, MessageSquare, Folder, Grid
+  ArrowUpDown, X, Check, MessageSquare, Folder, Grid,
+  Loader2, ArrowUp
 } from 'lucide-react';
 import api from '../services/api';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const TemplatesPage = () => {
   const location = useLocation();
@@ -19,12 +21,23 @@ const TemplatesPage = () => {
   const [showAllCategories, setShowAllCategories] = useState(false);
   const scrollContainerRef = useRef(null);
 
+  // Progressive infinite scroll state
+  const BATCH_SIZE = 12;
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const loadMoreRef = useRef(null);
+
   const scrollCategories = (direction) => {
     if (scrollContainerRef.current) {
       const scrollAmount = direction === 'left' ? -320 : 320;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
+
+  // Reset pagination whenever filters or category change
+  useEffect(() => {
+    setVisibleCount(BATCH_SIZE);
+  }, [selectedCategory, searchQuery, sortOption]);
 
   // Read ?category= query param on load
   useEffect(() => {
@@ -67,10 +80,44 @@ const TemplatesPage = () => {
     fetchData();
   }, [selectedCategory, searchQuery, sortOption]);
 
+  const hasMore = visibleCount < templates.length;
+  const visibleTemplates = templates.slice(0, visibleCount);
+
+  // Progressive infinite scroll listener via IntersectionObserver
+  useEffect(() => {
+    if (!hasMore || loading) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoadingMore) {
+          setIsLoadingMore(true);
+          setTimeout(() => {
+            setVisibleCount((prev) => Math.min(prev + BATCH_SIZE, templates.length));
+            setIsLoadingMore(false);
+          }, 200);
+        }
+      },
+      {
+        rootMargin: '350px',
+        threshold: 0.05
+      }
+    );
+
+    const target = loadMoreRef.current;
+    if (target) {
+      observer.observe(target);
+    }
+
+    return () => {
+      if (target) observer.unobserve(target);
+    };
+  }, [hasMore, loading, templates.length, isLoadingMore]);
+
   const clearFilters = () => {
     setSelectedCategory('all');
     setSearchQuery('');
     setSortOption('featured');
+    setVisibleCount(BATCH_SIZE);
   };
 
   return (
@@ -265,9 +312,14 @@ const TemplatesPage = () => {
         {/* Active Filters Display & Count */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
-            Showing <strong>{templates.length}</strong> website templates
+            Showing <strong>{Math.min(visibleCount, templates.length)}</strong> of <strong>{templates.length}</strong> website templates
             {selectedCategory !== 'all' && (
               <span> in <strong style={{ color: 'var(--accent-primary)' }}>{categories.find(c => c.slug === selectedCategory)?.name || selectedCategory}</strong></span>
+            )}
+            {hasMore && (
+              <span style={{ fontSize: '0.82rem', color: 'var(--accent-primary)', marginLeft: '0.6rem', fontWeight: 600 }}>
+                • Scroll to load more
+              </span>
             )}
           </div>
 
@@ -294,9 +346,12 @@ const TemplatesPage = () => {
 
         {/* Templates Grid */}
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-muted)' }}>
-            <div style={{ fontSize: '1.2rem', fontWeight: 600 }}>Loading templates...</div>
-          </div>
+          <LoadingSpinner
+            title="Loading Website Templates..."
+            subtitle="Fetching high-performance responsive designs across 35 categories..."
+            size="lg"
+            minHeight="420px"
+          />
         ) : templates.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '5rem 1rem', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px dashed var(--border-color)' }}>
             <Layers size={40} color="var(--text-muted)" style={{ margin: '0 auto 1rem auto' }} />
@@ -307,98 +362,143 @@ const TemplatesPage = () => {
             </button>
           </div>
         ) : (
-          <div className="grid-3">
-            {templates.map((tpl) => (
-              <div
-                key={tpl.templateId || tpl._id}
-                className="card"
-                style={{
-                  padding: 0,
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}
-              >
-                {/* Thumbnail (Clickable Link to Detail Page) */}
-                <Link
-                  to={`/templates/${tpl.slug || tpl._id}`}
+          <>
+            <div className="grid-3">
+              {visibleTemplates.map((tpl) => (
+                <div
+                  key={tpl.templateId || tpl._id}
+                  className="card template-card-fade"
                   style={{
-                    position: 'relative',
-                    height: '220px',
+                    padding: 0,
                     overflow: 'hidden',
-                    background: '#F8FAFC',
-                    display: 'block',
-                    cursor: 'pointer'
+                    display: 'flex',
+                    flexDirection: 'column'
                   }}
-                  title={`View ${tpl.title} Specifications`}
                 >
-                  <img
-                    src={tpl.thumbnail}
-                    alt={tpl.title}
-                    loading="lazy"
+                  {/* Thumbnail (Clickable Link to Detail Page) */}
+                  <Link
+                    to={`/templates/${tpl.slug || tpl._id}`}
                     style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform var(--transition-normal)'
+                      position: 'relative',
+                      height: '220px',
+                      overflow: 'hidden',
+                      background: '#F8FAFC',
+                      display: 'block',
+                      cursor: 'pointer'
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
-                  />
-                  <span className="badge badge-blue" style={{ position: 'absolute', top: '12px', left: '12px', background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(4px)' }}>
-                    {tpl.category}
-                  </span>
-                  <span className="badge" style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(15, 23, 42, 0.75)', color: '#FFFFFF', backdropFilter: 'blur(4px)', fontSize: '0.7rem' }}>
-                    {tpl.templateId}
-                  </span>
-                </Link>
-
-                {/* Content */}
-                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <Link to={`/templates/${tpl.slug || tpl._id}`} style={{ textDecoration: 'none' }}>
-                    <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem', lineHeight: 1.3 }}>
-                      {tpl.title}
-                    </h3>
+                    title={`View ${tpl.title} Specifications`}
+                  >
+                    <img
+                      src={tpl.thumbnail}
+                      alt={tpl.title}
+                      loading="lazy"
+                      decoding="async"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        transition: 'transform var(--transition-normal)'
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+                    />
+                    <span className="badge badge-blue" style={{ position: 'absolute', top: '12px', left: '12px', background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(4px)' }}>
+                      {tpl.category}
+                    </span>
+                    <span className="badge" style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(15, 23, 42, 0.75)', color: '#FFFFFF', backdropFilter: 'blur(4px)', fontSize: '0.7rem' }}>
+                      {tpl.templateId}
+                    </span>
                   </Link>
-                  <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.55, marginBottom: '1.25rem', flex: 1 }}>
-                    {tpl.shortDescription}
-                  </p>
 
-                  {/* Tech stack */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.5rem' }}>
-                    {(tpl.techStack || ['React.js', 'Vite']).slice(0, 3).map((tech, i) => (
-                      <span key={i} className="badge badge-purple" style={{ fontSize: '0.72rem' }}>
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Buttons */}
-                  <div className="template-card-actions">
-                    <Link
-                      to={tpl.demoUrl || `/demo/${tpl.demoSlug || tpl.slug}`}
-                      className="btn btn-outline btn-sm"
-                      style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
-                    >
-                      <Eye size={15} />
-                      <span>Live Demo</span>
+                  {/* Content */}
+                  <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <Link to={`/templates/${tpl.slug || tpl._id}`} style={{ textDecoration: 'none' }}>
+                      <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem', lineHeight: 1.3 }}>
+                        {tpl.title}
+                      </h3>
                     </Link>
+                    <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.55, marginBottom: '1.25rem', flex: 1 }}>
+                      {tpl.shortDescription}
+                    </p>
 
-                    <a
-                      href={`https://wa.me/919554079669?text=${encodeURIComponent(`Hello Satyam! I want to get a website designed based on your "${tpl.title}" template (${tpl.category}). Please share pricing and details.`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-whatsapp btn-sm"
-                      style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
-                    >
-                      <MessageSquare size={14} fill="#FFFFFF" color="#25D366" />
-                      <span>WhatsApp</span>
-                    </a>
+                    {/* Tech stack */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.5rem' }}>
+                      {(tpl.techStack || ['React.js', 'Vite']).slice(0, 3).map((tech, i) => (
+                        <span key={i} className="badge badge-purple" style={{ fontSize: '0.72rem' }}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="template-card-actions">
+                      <Link
+                        to={tpl.demoUrl || `/demo/${tpl.demoSlug || tpl.slug}`}
+                        className="btn btn-outline btn-sm"
+                        style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
+                      >
+                        <Eye size={15} />
+                        <span>Live Demo</span>
+                      </Link>
+
+                      <a
+                        href={`https://wa.me/919554079669?text=${encodeURIComponent(`Hello Satyam! I want to get a website designed based on your "${tpl.title}" template (${tpl.category}). Please share pricing and details.`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-whatsapp btn-sm"
+                        style={{ padding: '0.55rem 0.5rem', fontSize: '0.82rem', whiteSpace: 'nowrap', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.35rem' }}
+                      >
+                        <MessageSquare size={14} fill="#FFFFFF" color="#25D366" />
+                        <span>WhatsApp</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Scroll Sentinel & Loading Indicator */}
+            {hasMore ? (
+              <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+                <div ref={loadMoreRef} style={{ height: '20px' }} />
+
+                {isLoadingMore ? (
+                  <LoadingSpinner
+                    inline={true}
+                    title="Loading More Templates..."
+                    subtitle="Rendering next batch of responsive website designs"
+                  />
+                ) : (
+                  <button
+                    onClick={() => {
+                      setIsLoadingMore(true);
+                      setTimeout(() => {
+                        setVisibleCount((prev) => Math.min(prev + BATCH_SIZE, templates.length));
+                        setIsLoadingMore(false);
+                      }, 150);
+                    }}
+                    className="btn btn-outline"
+                    style={{ padding: '0.65rem 1.6rem', fontSize: '0.88rem', borderRadius: 'var(--radius-full)' }}
+                  >
+                    Load More Templates ({templates.length - visibleCount} remaining)
+                  </button>
+                )}
               </div>
-            ))}
-          </div>
+            ) : templates.length > BATCH_SIZE ? (
+              <div style={{ textAlign: 'center', padding: '3.5rem 0 1rem 0', borderTop: '1px solid var(--border-color)', marginTop: '3.5rem' }}>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontWeight: 600, marginBottom: '1.25rem' }}>
+                  🎉 You have viewed all {templates.length} templates across 35 categories
+                </div>
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="btn btn-outline btn-sm"
+                  style={{ gap: '0.4rem', borderRadius: 'var(--radius-full)', padding: '0.5rem 1.25rem' }}
+                >
+                  <ArrowUp size={15} /> Back to Top
+                </button>
+              </div>
+            ) : null}
+          </>
         )}
       </div>
     </div>

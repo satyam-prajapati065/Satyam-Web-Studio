@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import SEO from '../components/common/SEO';
 import { Eye, MessageSquare, ArrowLeft, CheckCircle2, Phone } from 'lucide-react';
 import api from '../services/api';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const TemplateDetailPage = () => {
   const { identifier } = useParams();
@@ -32,8 +33,12 @@ const TemplateDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="container" style={{ padding: '8rem 0', textAlign: 'center' }}>
-        <div style={{ fontSize: '1.2rem', color: 'var(--text-secondary)' }}>Loading Template Specifications...</div>
+      <div className="container" style={{ padding: '6rem 0' }}>
+        <LoadingSpinner
+          title="Loading Template Specifications..."
+          subtitle="Fetching design layouts, technical stack, and responsive demo details..."
+          size="lg"
+        />
       </div>
     );
   }

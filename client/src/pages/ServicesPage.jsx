@@ -6,6 +6,7 @@ import {
   Server, ShieldCheck, Zap, ArrowRight, CheckCircle2, AlertCircle, MessageSquare
 } from 'lucide-react';
 import api from '../services/api';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const ServicesPage = () => {
   const [services, setServices] = useState([]);
@@ -52,9 +53,17 @@ const ServicesPage = () => {
       </section>
 
       <div className="container" style={{ marginTop: '3.5rem' }}>
-        {/* Services List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', marginBottom: '4rem' }}>
-          {services.map((svc, idx) => (
+        {loading ? (
+          <LoadingSpinner
+            title="Loading Web Development Services..."
+            subtitle="Fetching engineering offerings, deliverables, and architecture packages..."
+            size="lg"
+            minHeight="400px"
+          />
+        ) : (
+          /* Services List */
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', marginBottom: '4rem' }}>
+            {services.map((svc, idx) => (
             <div
               key={svc.slug || svc._id}
               className="card grid-desktop-2"
@@ -122,6 +131,7 @@ const ServicesPage = () => {
             </div>
           ))}
         </div>
+        )}
 
         {/* Important Transparency Notice */}
         <div style={{
