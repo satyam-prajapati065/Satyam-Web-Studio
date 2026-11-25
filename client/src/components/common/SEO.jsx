@@ -5,7 +5,8 @@ const SEO = ({
   title,
   description,
   keywords,
-  canonical
+  canonical,
+  image
 }) => {
   const location = useLocation();
 
@@ -14,6 +15,7 @@ const SEO = ({
     const defaultTitle = 'Satyam Web Studio | Best Freelance Web Developer & Website Design in Delhi NCR';
     const defaultDesc = 'Satyam Web Studio by Satyam Prajapati — Top-rated Full-Stack Web & React.js Developer in Delhi NCR, India. Custom websites, e-commerce, and 35+ interactive templates.';
     const defaultKeywords = 'Satyam Web Studio, Satyam Prajapati, Freelance Web Developer Delhi NCR, Best Website Developer India, React Developer Delhi, MERN Stack Freelancer';
+    const defaultImage = 'https://satyamwebstudio.netlify.app/og-preview.png';
 
     // Update document title
     const fullTitle = title
@@ -41,10 +43,14 @@ const SEO = ({
     setMetaTag('og:title', fullTitle, true);
     setMetaTag('og:description', description || defaultDesc, true);
     setMetaTag('og:url', `https://satyamwebstudio.netlify.app${location.pathname}`, true);
+    setMetaTag('og:image', image || defaultImage, true);
+    setMetaTag('og:image:width', '1200', true);
+    setMetaTag('og:image:height', '630', true);
 
     // Update Twitter
     setMetaTag('twitter:title', fullTitle);
     setMetaTag('twitter:description', description || defaultDesc);
+    setMetaTag('twitter:image', image || defaultImage);
 
     // Update Canonical
     let canonicalLink = document.querySelector('link[rel="canonical"]');
@@ -54,7 +60,7 @@ const SEO = ({
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.setAttribute('href', canonical || `https://satyamwebstudio.netlify.app${location.pathname}`);
-  }, [title, description, keywords, canonical, location.pathname]);
+  }, [title, description, keywords, canonical, image, location.pathname]);
 
   return null;
 };
